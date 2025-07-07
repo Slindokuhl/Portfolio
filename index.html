@@ -1,387 +1,903 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slindokuhle Atlehang Ngidi - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* GENERAL STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #ADD8E6;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        p {
+            color: rgb(85, 85, 85);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated-text {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .section__text__p1.animated-text {
+            animation-delay: 0.2s;
+        }
+
+        .title.animated-text {
+            animation-delay: 0.4s;
+        }
+
+        .section__text__p2.animated-text {
+            animation-delay: 0.6s;
+        }
+
+        /* TRANSITIONS */
+        a, .btn {
+            transition: all 300ms ease;
+        }
+
+        /* NAVIGATION */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            padding: 0 5%;
+            background-color: rgba(173, 216, 230, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-weight: 600;
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #333;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* HAMBURGER MENU */
+        #hamburger-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(173, 216, 230, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 0 5%;
+            height: 80px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .hamburger-menu {
+            position: relative;
+        }
+
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 24px;
+            width: 30px;
+            cursor: pointer;
+        }
+
+        .hamburger-icon span {
+            width: 100%;
+            height: 2px;
+            background-color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .menu-links {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            width: 200px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .menu-links.open {
+            max-height: 300px;
+        }
+
+        .menu-links a {
+            display: block;
+            padding: 15px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-links a:hover {
+            background-color: #f8f9fa;
+            color: #007bff;
+        }
+
+        .menu-links li {
+            list-style: none;
+        }
+
+        .hamburger-icon.open span:first-child {
+            transform: rotate(45deg) translate(10px, 5px);
+        }
+
+        .hamburger-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-icon.open span:last-child {
+            transform: rotate(-45deg) translate(10px, -5px);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 100px 5% 80px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-container {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* PROFILE SECTION */
+        #profile {
+            padding-top: 120px;
+        }
+
+        #profile .section-container {
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .section__pic-container {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section__pic-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section__text {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section__text__p1 {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section__text__p2 {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* BUTTONS */
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: 2px solid #333;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-color-1 {
+            background-color: #333;
+            color: white;
+        }
+
+        .btn-color-1:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+        }
+
+        .btn-color-2 {
+            background-color: transparent;
+            color: #333;
+        }
+
+        .btn-color-2:hover {
+            background-color: #333;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* SOCIAL ICONS */
+        #socials-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* ABOUT SECTION */
+        #about .section-container {
+            flex-wrap: wrap;
+        }
+
+        .about-containers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .details-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .details-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .details-container h3 {
+            color: #333;
+            margin: 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .about-description {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            line-height: 1.8;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* EXPERIENCE SECTION */
+        .experience-details-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .experience-sub-title {
+            color: #d63384;
+            font-weight: 600;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .article-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        article {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-3px);
+        }
+
+        article h3 {
+            color: #333;
+            margin: 0.5rem 0;
+        }
+
+        article p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* PROJECTS SECTION */
+        .color-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .color-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-title {
+            color: #333;
+            margin: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-btn {
+            color: #333;
+            border-color: #007bff;
+            margin: 0.5rem;
+        }
+
+        .project-btn:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* CONTACT SECTION */
+        .contact-info-upper-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-info-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info-container a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info-container a:hover {
+            color: #007bff;
+        }
+
+        .email-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        footer .nav-links {
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media screen and (max-width: 1200px) {
+            .section-container {
+                gap: 2rem;
+            }
+            
+            section {
+                padding: 80px 3% 60px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            #desktop-nav {
+                display: none;
+            }
+            
+            #hamburger-nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .section-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .section__pic-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .about-containers {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-info-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            section {
+                padding: 60px 5% 40px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+            
+            .article-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .section__pic-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* UTILITY CLASSES */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Desktop Navigation -->
     <nav id="desktop-nav">
-      <div class="logo">Atlehang Ngidi</div>
-      <div>
+        <div class="logo">Atlehang Ngidi</div>
         <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-    <nav id="hamburger-nav">
-      <div class="logo">Atlehang Ngidi</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </div>
-      </div>
-    </nav>
-    <section id="profile">
-      <div class="section__pic-container">
-        <img src="./assets/profile-pic.png.jpeg" alt="Atlehang Ngidi profile picture" />
-      </div>
- <div class="section__text">
-  <p class="section__text__p1 animated-text">Hello, I'm</p>
-  <h1 class="title animated-text">Slindokuhle Atlehang Ngidi</h1>
-  <p class="section__text__p2 animated-text">Frontend Developer, Backend Developer, Web Developer</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/resume-example.pdf')"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            onclick="location.href='https://linkedin.com/'"
-          />
-          <img
-            src="./assets/github.png"
-            alt="My Github profile"
-            class="icon"
-            onclick="location.href='https://github.com/'"
-          />
-        </div>
-      </div>
-    </section>
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="./assets/profile-pic.png.jpeg"
-            alt="Profile picture"
-            class="about-pic"
-          />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/experience.png"
-                alt="Experience icon"
-                class="icon"
-              />
-              <h3>Experience</h3>
-              <p>2+ years <br />Frontend Development 
-              <br/> Backend Developnment <br /> Web Developnment</p>
-            </div>
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <p>Diploma</p>
-            </div>
-          </div>
-          <p class="about-description">
-            As a qualified professional web developer with four years of academic experience from Mangosuthu University of Technology, 
-            I bring a robust combination of theoretical knowledge and practical expertise. My two-year internship at the University's 
-            Innovation Lab has equipped me with hands-on experience in developing innovative solutions and working on real-world projects.
-          </p>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      />
-    </section>
-    <section id="experience">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Experience</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/html.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>HTML</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/css.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>CSS</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/atoms.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Ionic</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/java-script.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/typescript.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>TypeScript</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/composite.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Material UI</h3>
-                  <p>Experience</p>
-                </div>
-              </article>
-            </div>
-          </div>
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/database.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>PostgreSQL</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/node-js.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Node JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/node-js.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Express JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/github.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Git</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      />
-    </section>
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-1.png"
-                alt="Project 1"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Student Perfomance System</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://studentmanagementsytem-96ac6.web.app/login'"
-              >
-                Live Demo
-              </button>
-              </div>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-2.png"
-                alt="Project 2"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Intern Report Tracking System</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/Attendify.png"
-                alt="Project 3"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Attendify</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://scholarship-832f3.web.app/'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
-      />
-    </section>
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon"
-          />
-          <p><a href="mailto:examplemail@gmail.com">slindokuhleatlehang22009757@gmail.com</a><br/></p>
-        </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-          />
-          <p><a href="https://www.linkedin.com">LinkedIn</a></p>
-        </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/phone.png"
-            alt="Github icon"
-            class="icon contact-icon"
-          />
-          <p><a href="cellPhone">0848038960</a></p>
-      </div>
-    </section>
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
-          </ul>
+        </ul>
+    </nav>
+    
+    <!-- Mobile Navigation -->
+    <nav id="hamburger-nav">
+        <div class="logo">Atlehang Ngidi</div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            </div>
         </div>
-      </nav>
-    </footer>
-    <script src="script.js"></script>
-  </body>
-</html>
+    </nav>
 
+    <!-- Profile Section -->
+    <section id="profile">
+        <div class="section-container">
+            <div class="section__pic-container">
+                <img src="./assets/profile-pic.png.jpeg" alt="Atlehang Ngidi profile picture" />
+            </div>
+            <div class="section__text">
+                <p class="section__text__p1 animated-text">Hello, I'm</p>
+                <h1 class="title animated-text">Slindokuhle Atlehang Ngidi</h1>
+                <p class="section__text__p2 animated-text">Full Stack Developer</p>
+                <div class="btn-container">
+                    <button class="btn btn-color-2" onclick="window.open('./assets/resume-example.pdf')">
+                        Download CV
+                    </button>
+                    <button class="btn btn-color-1" onclick="location.href='#contact'">
+                        Contact Info
+                    </button>
+                </div>
+                <div id="socials-container">
+                    <img src="./assets/linkedin.png" alt="LinkedIn" class="icon" 
+                         onclick="window.open('https://www.linkedin.com/in/slindokuhle-ngidi-69181b217', '_blank')" />
+                    <img src="./assets/github.png" alt="GitHub" class="icon" 
+                         onclick="window.open('https://github.com/', '_blank')" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <p class="section__text__p1 text-center">Get To Know More</p>
+        <h1 class="title text-center mb-2">About Me</h1>
+        <div class="section-container">
+            <div class="section__pic-container">
+                <img src="./assets/profile-pic.png.jpeg" alt="Profile picture" />
+            </div>
+            <div class="about-details-container">
+                <div class="about-containers">
+                    <div class="details-container">
+                        <img src="./assets/experience.png" alt="Experience icon" class="icon" />
+                        <h3>Experience</h3>
+                        <p>2+ years<br/>Frontend Development<br/>Backend Development<br/>Web Development</p>
+                    </div>
+                    <div class="details-container">
+                        <img src="./assets/education.png" alt="Education icon" class="icon" />
+                        <h3>Education</h3>
+                        <p>Diploma in Information Technology<br/>Mangosuthu University of Technology</p>
+                    </div>
+                </div>
+                <div class="about-description">
+                    <p>As a qualified professional web developer with four years of academic experience from Mangosuthu University of Technology, I bring a robust combination of theoretical knowledge and practical expertise. My two-year internship at the University's Innovation Lab has equipped me with hands-on experience in developing innovative solutions and working on real-world projects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <p class="section__text__p1 text-center">Explore My</p>
+        <h1 class="title text-center mb-2">Experience</h1>
+        <div class="experience-details-container">
+            <div class="about-containers">
+                <div class="details-container">
+                    <h2 class="experience-sub-title">Frontend Development</h2>
+                    <div class="article-container">
+                        <article>
+                            <img src="./assets/html.png" alt="HTML icon" class="icon" />
+                            <h3>HTML</h3>
+                            <p>Experienced</p>
+                        </article>
+                        <article>
+                            <img src="./assets/css.png" alt="CSS icon" class="icon" />
+                            <h3>CSS</h3>
+                            <p>Experienced</p>
+                        </article>
+                        <article>
+                            <img src="./assets/atoms.png" alt="Ionic icon" class="icon" />
+                            <h3>Ionic</h3>
+                            <p>Experienced</p>
+                        </article>
+                        <article>
+                            <img src="./assets/java-script.png" alt="JavaScript icon" class="icon" />
+                            <h3>JavaScript</h3>
+                            <p>Intermediate</p>
+                        </article>
+                        <article>
+                            <img src="./assets/typescript.png" alt="TypeScript icon" class="icon" />
+                            <h3>TypeScript</h3>
+                            <p>Basic</p>
+                        </article>
+                        <article>
+                            <img src="./assets/composite.png" alt="Material UI icon" class="icon" />
+                            <h3>Material UI</h3>
+                            <p>Experienced</p>
+                        </article>
+                    </div>
+                </div>
+                <div class="details-container">
+                    <h2 class="experience-sub-title">Backend Development</h2>
+                    <div class="article-container">
+                        <article>
+                            <img src="./assets/database.png" alt="PostgreSQL icon" class="icon" />
+                            <h3>PostgreSQL</h3>
+                            <p>Intermediate</p>
+                        </article>
+                        <article>
+                            <img src="./assets/node-js.png" alt="Node.js icon" class="icon" />
+                            <h3>Node.js</h3>
+                            <p>Intermediate</p>
+                        </article>
+                        <article>
+                            <img src="./assets/node-js.png" alt="Express.js icon" class="icon" />
+                            <h3>Express.js</h3>
+                            <p>Intermediate</p>
+                        </article>
+                        <article>
+                            <img src="./assets/github.png" alt="Git icon" class="icon" />
+                            <h3>Git</h3>
+                            <p>Intermediate</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <p class="section__text__p1 text-center">Browse My Recent</p>
+        <h1 class="title text-center mb-2">Projects</h1>
+        <div class="experience-details-container">
+            <div class="about-containers">
+                <div class="details-container color-container">
+                    <img src="./assets/project-1.png" alt="Student Performance System" class="project-img" />
+                    <h2 class="project-title">Student Performance System</h2>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" 
+                                onclick="window.open('https://github.com/', '_blank')">
+                            GitHub
+                        </button>
+                        <button class="btn btn-color-2 project-btn" 
+                                onclick="window.open('https://studentmanagementsytem-96ac6.web.app/login', '_blank')">
+                            Live Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="details-container color-container">
+                    <img src="./assets/project-2.png" alt="Intern Report Tracking System" class="project-img" />
+                    <h2 class="project-title">Intern Report Tracking System</h2>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" 
+                                onclick="window.open('https://github.com/', '_blank')">
+                            GitHub
+                        </button>
+                        <button class="btn btn-color-2 project-btn" 
+                                onclick="window.open('https://github.com/', '_blank')">
+                            Live Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="details-container color-container">
+                    <img src="./assets/Attendify.png" alt="Attendify" class="project-img" />
+                    <h2 class="project-title">Attendify</h2>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn" 
+                                onclick="window.open('https://github.com/', '_blank')">
+                            GitHub
+                        </button>
+                        <button class="btn btn-color-2 project-btn" 
+                                onclick="window.open('https://scholarship-832f3.web.app/', '_blank')">
+                            Live Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <p class="section__text__p1 text-center">Get in Touch</p>
+        <h1 class="title text-center mb-2">Contact Me</h1>
+        <div class="contact-info-upper-container">
+            <div class="contact-info-container">
+                <img src="./assets/email.png" alt="Email icon" class="icon email-icon" />
+                <a href="mailto:slindokuhleatlehang22009757@gmail.com">
+                    slindokuhleatlehang22009757@gmail.com
+                </a>
+            </div>
+            <div class="contact-info-container">
+                <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon" />
+                <a href="https://www.linkedin.com/in/slindokuhle-ngidi-69181b217" target="_blank">
+                    LinkedIn Profile
+                </a>
+            </div>
+            <div class="contact-info-container">
+                <img src="./assets/phone.png" alt="Phone icon" class="icon" />
+                <a href="tel:+27848038960">+27 84 803 8960</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <p>&copy; 2024 Slindokuhle Atlehang Ngidi. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const menu = document.querySelector(".menu-links");
+            const icon = document.querySelector(".hamburger-icon");
+            menu.classList.toggle("open");
+            icon.classList.toggle("open");
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const menu = document.querySelector(".menu-links");
+            const hamburger = document.querySelector(".hamburger-menu");
+            
+            if (!hamburger.contains(e.target) && menu.classList.contains('open')) {
+                toggleMenu();
+            }
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('#desktop-nav');
+            const hamburgerNav = document.querySelector('#hamburger-nav');
+            
+            if (window.scrollY > 100) {
+                nav.style.backgroundColor = 'rgba(173, 216, 230, 0.98)';
+                hamburgerNav.style.backgroundColor = 'rgba(173, 216, 230, 0.98)';
+            } else {
+                nav.style.backgroundColor = 'rgba(173, 216, 230, 0.95)';
+                hamburgerNav.style.backgroundColor = 'rgba(173, 216, 230, 0.95)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.details-container, .color-container').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        });
+
+        // Initialize
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.3s ease';
+    </script>
+</body>
+</html>
