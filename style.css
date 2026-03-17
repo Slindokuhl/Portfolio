@@ -582,3 +582,18 @@
     transform: scale(1) rotate(360deg);
   }
 }
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-header .title {
+    margin-bottom: 0.5rem; /* space between title and subtitle */
+}
+
+.section-header .section__text__p1 {
+    font-size: 1.2rem;
+    color: #666;
+}
