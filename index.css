@@ -507,30 +507,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .contact-info-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin: 1rem;
-            flex-wrap: wrap;
-        }
+       
 
-        .contact-info-container a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .contact-info-container a:hover {
-            color: #007bff;
-        }
-
-        .email-icon {
-            width: 30px;
-            height: 30px;
-        }
-
+        
         /* FOOTER */
         footer {
             background-color: rgba(255, 255, 255, 0.9);
