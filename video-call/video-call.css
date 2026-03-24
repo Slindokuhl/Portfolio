@@ -1,0 +1,276 @@
+/* FULL SCREEN JOIN */
+#join-screen {
+  height: 100vh;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+/* MAIN LAYOUT */
+.join-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* LEFT SIDE */
+.join-left {
+  max-width: 500px;
+}
+
+.logo {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.join-left h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.desc {
+  color: #94a3b8;
+  margin-bottom: 30px;
+}
+
+.features div {
+  margin-bottom: 12px;
+  color: #cbd5f5;
+}
+
+/* RIGHT CARD */
+.join-card {
+  width: 350px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 16px;
+  backdrop-filter: blur(15px);
+}
+
+.join-card h2 {
+  margin-bottom: 5px;
+}
+
+.small-text {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.join-card label {
+  font-size: 12px;
+  color: #94a3b8;
+  display: block;
+  margin-top: 10px;
+}
+
+.join-card input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: none;
+  background: #1e293b;
+  color: white;
+}
+
+.join-card button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: linear-gradient(90deg, #4f46e5, #6366f1);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.join-card button:hover {
+  opacity: 0.9;
+}
+
+/* HINT BOX */
+.hint-box {
+  margin-top: 20px;
+  padding: 10px;
+  background: rgba(79,70,229,0.1);
+  border: 1px solid rgba(79,70,229,0.3);
+  border-radius: 10px;
+  font-size: 13px;
+  color: #c7d2fe;
+}
+
+.video-call-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+}
+
+.video-call-container input {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 10px;
+}
+
+.video-call-container button {
+  width: 100%;
+  padding: 10px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== MEETING SCREEN ===== */
+/* ===== MEETING SCREEN ===== */
+/* ===== MEETING SCREEN ===== */
+#meeting-screen {
+  position: fixed;
+  inset: 0;
+  background: #0b1220;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+/* TOP BAR */
+.top-bar {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  background: #0f172a;
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.meeting-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live-badge {
+  color: #ef4444;
+  font-size: 13px;
+}
+
+.participants-count {
+  background: rgba(255,255,255,0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* ===== VIDEO GRID ===== */
+.video-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  padding: 40px;
+  place-items: center;
+}
+
+/* ===== VIDEO CARD ===== */
+.video-player {
+  width: 100%;
+  max-width: 420px;
+  height: 240px;
+  background: #111827;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FIX: FORCE VIDEO INSIDE CARD */
+.video-player video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* ===== AVATAR ===== */
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Hide avatar if video exists */
+.video-player video ~ .avatar {
+  display: none;
+}
+
+/* ===== NAME TAG ===== */
+.name-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0,0,0,0.65);
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: white;
+}
+
+/* ===== CONTROLS ===== */
+.controls {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  background: #0f172a;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* BUTTONS */
+.controls button {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  border: none;
+  background: #1e293b;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.controls button:hover {
+  transform: scale(1.05);
+}
+
+/* PRIMARY */
+.control-btn.primary {
+  background: #2563eb;
+}
+
+/* LEAVE BUTTON */
+.control-btn.leave {
+  background: #dc2626;
+}

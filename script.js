@@ -1,3 +1,61 @@
+import AgoraRTC from "agora-rtc-sdk-ng";
+
+let client;
+let localTracks = [];
+
+const APP_ID = "8e65dc0cc41e48f28011f902cd8f3405";
+const TOKEN = null; // Replace with token if needed
+
+async function joinCall() {
+  try {
+    const channel = document.getElementById("channelName").value;
+    if (!channel) return alert("Enter meeting name");
+
+    client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+    await client.join(APP_ID, channel, TOKEN, null);
+    console.log("Joined successfully");
+
+    localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
+
+    const player = document.createElement("div");
+    player.id = "local-player";
+    player.className = "video-player";
+    document.getElementById("video-streams").appendChild(player);
+    localTracks[1].play("local-player");
+
+    await client.publish(localTracks);
+
+    client.on("user-published", async (user, mediaType) => {
+      await client.subscribe(user, mediaType);
+      if (mediaType === "video") {
+        const remotePlayer = document.createElement("div");
+        remotePlayer.id = user.uid;
+        remotePlayer.className = "video-player";
+        document.getElementById("video-streams").appendChild(remotePlayer);
+        user.videoTrack.play(remotePlayer);
+      }
+      if (mediaType === "audio") user.audioTrack.play();
+    });
+
+  } catch (err) {
+    console.error(err);
+    alert("Error: " + err.message);
+  }
+}
+
+async function leaveCall() {
+  for (let track of localTracks) {
+    track.stop();
+    track.close();
+  }
+  await client.leave();
+  document.getElementById("video-streams").innerHTML = "";
+}
+
+document.getElementById("joinBtn").addEventListener("click", joinCall);
+document.getElementById("leaveBtn").addEventListener("click", leaveCall);
+
+  
   function toggleMenu() {
             const menu = document.querySelector(".menu-links");
             const icon = document.querySelector(".hamburger-icon");
@@ -105,4 +163,4 @@
       alert("Geolocation is not supported by this browser.");
     }
   }
-  
+
