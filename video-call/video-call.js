@@ -16,28 +16,28 @@ export default class VideoCall {
     this.container.innerHTML = `
     <!-- JOIN SCREEN -->
     <div id="join-screen">
-      <div class="join-container">
+      <div class="join-wrapper">
 
         <div class="join-left">
           <div class="logo">🎥 MicroSlikx</div>
 
-          <h1>Video meetings built for real collaboration</h1>
+          <h1>Start or Join a Meeting</h1>
 
-          <p class="desc">
-            Create an instant meeting room, share your unique Meeting ID,
-            and invite anyone to join — no account needed.
+          <p class="subtitle">
+            Connect instantly with your team. Create a meeting, share your ID,
+            and collaborate in real-time.
           </p>
 
-          <div class="features">
-            <div>🔗 Generate a unique Meeting ID instantly</div>
-            <div>👥 Invite participants from anywhere</div>
-            <div>🖥️ Screen sharing in one click</div>
-            <div>🔒 Secure connections</div>
-          </div>
+          <ul class="features">
+            <li>📌 Create your own meeting instantly</li>
+            <li>🔗 Share a unique Meeting ID</li>
+            <li>👥 Join from anywhere</li>
+            <li>⏰ Schedule and manage sessions easily</li>
+          </ul>
         </div>
 
         <div class="join-card">
-          <h2>Join a Meeting</h2>
+          <h2>Join Meeting</h2>
           <p class="small-text">Enter your name and a Meeting ID</p>
 
           <label>YOUR NAME</label>
@@ -49,7 +49,7 @@ export default class VideoCall {
           <button id="joinBtn">Join Now</button>
 
           <div class="hint-box">
-            💡 Enter any ID to create a room instantly
+            💡 Tip: Create a meeting by entering a new ID and sharing it with others.
           </div>
         </div>
 
@@ -82,23 +82,23 @@ export default class VideoCall {
     </div>
     `;
 
-     // refs
-    this.joinScreen = this.container.querySelector("#join-screen");
+    // refs
+    this.joinScreen    = this.container.querySelector("#join-screen");
     this.meetingScreen = this.container.querySelector("#meeting-screen");
-    this.videoStreams = this.container.querySelector("#video-streams");
+    this.videoStreams   = this.container.querySelector("#video-streams");
 
     // buttons
-    this.container.querySelector("#joinBtn").onclick = () => this.joinChannel();
-    this.container.querySelector("#leaveBtn").onclick = () => this.leaveChannel();
-    this.container.querySelector("#muteAudio").onclick = () => this.toggleAudio();
-    this.container.querySelector("#muteVideo").onclick = () => this.toggleVideo();
+    this.container.querySelector("#joinBtn").onclick        = () => this.joinChannel();
+    this.container.querySelector("#leaveBtn").onclick       = () => this.leaveChannel();
+    this.container.querySelector("#muteAudio").onclick      = () => this.toggleAudio();
+    this.container.querySelector("#muteVideo").onclick      = () => this.toggleVideo();
     this.container.querySelector("#shareScreenBtn").onclick = () => this.shareScreen();
   }
 
   async joinChannel() {
     if (this.joined) return;
 
-    const name = this.container.querySelector("#username").value;
+    const name    = this.container.querySelector("#username").value;
     const channel = this.container.querySelector("#channelName").value;
 
     document.querySelector("header")?.style.setProperty("display", "none");
@@ -122,9 +122,8 @@ export default class VideoCall {
 
         if (mediaType === "video") {
           user.videoTrack.play(player);
-
-          // hide avatar when video starts
-          player.querySelector(".avatar").style.display = "none";
+          const avatar = player.querySelector(".avatar");
+          if (avatar) avatar.style.display = "none";
         }
 
         if (mediaType === "audio") user.audioTrack.play();
@@ -150,9 +149,10 @@ export default class VideoCall {
       const localPlayer = this.createPlayer("local-player", `${name} (You)`);
       this.localTracks[1].play(localPlayer);
 
-      localPlayer.querySelector(".avatar").style.display = "none";
+      const localAvatar = localPlayer.querySelector(".avatar");
+      if (localAvatar) localAvatar.style.display = "none";
 
-      this.joinScreen.style.display = "none";
+      this.joinScreen.style.display    = "none";
       this.meetingScreen.style.display = "flex";
 
       this.container.querySelector("#meeting-name").innerText = channel;
@@ -165,8 +165,10 @@ export default class VideoCall {
   }
 
   createPlayer(id, name) {
+    if (document.getElementById(id)) return document.getElementById(id);
+
     const div = document.createElement("div");
-    div.id = id;
+    div.id        = id;
     div.className = "video-player";
 
     const initial = name.charAt(0).toUpperCase();
@@ -205,7 +207,8 @@ export default class VideoCall {
       const player = this.createPlayer("screen-player", "You (Screen)");
       this.screenTrack.play(player);
 
-      player.querySelector(".avatar").style.display = "none";
+      const avatar = player.querySelector(".avatar");
+      if (avatar) avatar.style.display = "none";
 
     } catch (err) {
       console.error(err);
@@ -229,7 +232,7 @@ export default class VideoCall {
 
     document.querySelector("header")?.style.setProperty("display", "block");
 
-    this.joinScreen.style.display = "flex";
+    this.joinScreen.style.display    = "flex";
     this.meetingScreen.style.display = "none";
 
     this.joined = false;

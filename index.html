@@ -4,11 +4,16 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css" />
+  <title>Slindokuhle Atlehang Ngidi</title>
 </head>
 <body>
-  <!-- Navigation -->
+
+  <!-- DESKTOP NAVIGATION -->
   <nav id="desktop-nav">
+    <div class="logo">Slindokuhle Atlehang Ngidi</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="experience.html">Experience</a></li>
@@ -17,40 +22,88 @@
     </ul>
   </nav>
 
-  <!-- Profile / About Section -->
-  <section id="about">
-  <div class="section-header text-center">
-        <div class="logo">Slindokuhle Atlehang Ngidi</div>
+  <!-- HAMBURGER NAVIGATION -->
+  <nav id="hamburger-nav">
+    <div class="logo">Slindokuhle Atlehang Ngidi</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="menu-links">
+        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="experience.html" onclick="toggleMenu()">Experience</a></li>
+        <li><a href="projects.html" onclick="toggleMenu()">Projects</a></li>
+        <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-   <h1>Hi, I'm Slindokuhle 👋</h1>
-      <h2>Full Stack Developer</h2>
-      <p>
-        I build modern, responsive, and scalable web applications.
+  <!-- PROFILE / ABOUT SECTION -->
+  <section id="about">
+    <div class="section-header text-center">
+      <p class="section__text__p1 animated-text">Get To Know More</p>
+      <h1 class="title animated-text">Hi, I'm Slindokuhle 👋</h1>
+      <h2 class="section__text__p2 animated-text">Full Stack Developer</h2>
+      <p class="animated-text">
+        I build modern, responsive, and scalable web applications.<br/>
         Passionate about creating solutions that make real-world impact.
       </p>
+    </div>
 
-  <div class="section-container">
-    <div class="section__pic-container">
-      <img src="./assets/Profile.png" alt="Profile" />
-    </div>
-    <div class="about-details-container">
-      <div class="about-containers">
-        <div class="details-container">
-          <img src="./assets/experience.png" alt="Experience icon" class="icon" />
-          <h3>Experience</h3>
-          <p>2+ years<br/>Frontend & Backend Development</p>
+    <div class="section-container">
+      <div class="section__pic-container">
+        <img src="./assets/Profile.png" alt="Profile" />
+      </div>
+
+      <div class="about-details-container">
+        <div class="about-containers">
+          <div class="details-container">
+            <img src="./assets/experience.png" alt="Experience icon" class="icon" />
+            <h3>Experience</h3>
+            <p>2+ years<br/>Frontend &amp; Backend Development</p>
+          </div>
+          <div class="details-container">
+            <img src="./assets/education.png" alt="Education icon" class="icon" />
+            <h3>Education</h3>
+            <p>Diploma in IT<br/>Mangosuthu University of Technology</p>
+          </div>
         </div>
-        <div class="details-container">
-          <img src="./assets/education.png" alt="Education icon" class="icon" />
-          <h3>Education</h3>
-          <p>Diploma in IT<br/>Mangosuthu University of Technology</p>
+        <div class="about-description">
+          <p>As a qualified professional web developer with two years of academic experience from Mangosuthu University of Technology,
+            I bring a robust combination of theoretical knowledge and practical expertise.
+            My two-year internship at the University's Innovation Lab has equipped me with hands-on experience in developing innovative solutions and working on real-world projects.</p>
+        </div>
+
+        <!-- SOCIAL ICONS -->
+        <div id="socials-container">
+          <img src="./assets/linkedin.png" alt="LinkedIn" class="icon" onclick="location.href='https://linkedin.com'" />
+          <img src="./assets/github.png" alt="GitHub" class="icon" onclick="location.href='https://github.com'" />
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="btn-container">
+          <button class="btn btn-color-2" onclick="window.open('./assets/resume.pdf')">Download CV</button>
+          <button class="btn btn-color-1" onclick="location.href='contact.html'">Contact Info</button>
         </div>
       </div>
-      <div class="about-description">
-        <p>As a qualified professional web developer with two years of academic experience from Mangosuthu University of Technology,
-          I bring a robust combination of theoretical knowledge and practical expertise.
-          My two-year internship at the University's Innovation Lab has equipped me with hands-on experience in developing innovative solutions and working on real-world projects.</p>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <p>Copyright &#169; 2024 Slindokuhle Ngidi. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

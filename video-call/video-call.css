@@ -1,63 +1,86 @@
-/* FULL SCREEN JOIN */
+/* =====================
+   JOIN SCREEN
+===================== */
 #join-screen {
-  height: 100vh;
+  min-height: 100vh;
   background: radial-gradient(circle at top, #0f172a, #020617);
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
+  padding: 2rem 5%;
 }
 
 /* MAIN LAYOUT */
-.join-container {
+.join-container,
+.join-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
 /* LEFT SIDE */
 .join-left {
+  flex: 1;
+  min-width: 260px;
   max-width: 500px;
 }
 
-.logo {
+.join-left .logo {
   font-weight: bold;
   margin-bottom: 20px;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: white;
 }
 
 .join-left h1 {
-  font-size: 42px;
+  font-size: clamp(1.5rem, 4vw, 2.6rem);
   line-height: 1.2;
   margin-bottom: 20px;
 }
 
-.desc {
+.join-left .subtitle,
+.join-left .desc {
   color: #94a3b8;
   margin-bottom: 30px;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  line-height: 1.7;
 }
 
-.features div {
+.join-left .features,
+.join-left ul.features {
+  list-style: none;
+  padding: 0;
+}
+
+.join-left .features div,
+.join-left .features li {
   margin-bottom: 12px;
-  color: #cbd5f5;
+  color: #cbd5e1;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
 }
 
 /* RIGHT CARD */
 .join-card {
-  width: 350px;
+  width: clamp(280px, 40vw, 380px);
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
-  padding: 30px;
+  padding: clamp(1.25rem, 3vw, 2rem);
   border-radius: 16px;
   backdrop-filter: blur(15px);
+  flex-shrink: 0;
 }
 
 .join-card h2 {
   margin-bottom: 5px;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
 }
 
-.small-text {
+.join-card .small-text {
   color: #94a3b8;
   font-size: 14px;
   margin-bottom: 20px;
@@ -68,9 +91,12 @@
   color: #94a3b8;
   display: block;
   margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.join-card input {
+.join-card input,
+#join-screen input {
   width: 100%;
   padding: 12px;
   margin-top: 5px;
@@ -78,9 +104,18 @@
   border: none;
   background: #1e293b;
   color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  outline: none;
 }
 
-.join-card button {
+.join-card input:focus,
+#join-screen input:focus {
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+}
+
+.join-card button,
+#join-screen button#joinBtn {
   width: 100%;
   margin-top: 20px;
   padding: 14px;
@@ -90,49 +125,33 @@
   color: white;
   font-weight: bold;
   cursor: pointer;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  font-family: "Poppins", sans-serif;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.join-card button:hover {
+.join-card button:hover,
+#join-screen button#joinBtn:hover {
   opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 /* HINT BOX */
-.hint-box {
-  margin-top: 20px;
-  padding: 10px;
+.hint-box,
+.hint {
+  margin-top: 15px;
+  padding: 10px 12px;
   background: rgba(79,70,229,0.1);
   border: 1px solid rgba(79,70,229,0.3);
   border-radius: 10px;
   font-size: 13px;
   color: #c7d2fe;
+  line-height: 1.5;
 }
 
-.video-call-container {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  width: 300px;
-}
-
-.video-call-container input {
-  width: 100%;
-  margin: 0.5rem 0;
-  padding: 10px;
-}
-
-.video-call-container button {
-  width: 100%;
-  padding: 10px;
-  background: black;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-/* ===== MEETING SCREEN ===== */
-/* ===== MEETING SCREEN ===== */
-/* ===== MEETING SCREEN ===== */
+/* =====================
+   MEETING SCREEN
+===================== */
 #meeting-screen {
   position: fixed;
   inset: 0;
@@ -148,45 +167,62 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 clamp(1rem, 3vw, 30px);
   background: #0f172a;
   color: white;
   border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
 }
 
 .meeting-info {
   display: flex;
   align-items: center;
   gap: 10px;
+  overflow: hidden;
+}
+
+.meeting-info span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 40vw;
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 .live-badge {
   color: #ef4444;
-  font-size: 13px;
+  font-size: clamp(0.75rem, 1.5vw, 13px);
+  flex-shrink: 0;
 }
 
 .participants-count {
   background: rgba(255,255,255,0.1);
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: clamp(0.75rem, 1.5vw, 13px);
+  white-space: nowrap;
 }
 
-/* ===== VIDEO GRID ===== */
+/* =====================
+   VIDEO GRID
+===================== */
 .video-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-  padding: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1rem, 2vw, 30px);
+  padding: clamp(1rem, 3vw, 40px);
   place-items: center;
+  overflow-y: auto;
 }
 
-/* ===== VIDEO CARD ===== */
+/* =====================
+   VIDEO CARD
+===================== */
 .video-player {
   width: 100%;
   max-width: 420px;
-  height: 240px;
+  height: clamp(160px, 25vw, 240px);
   background: #111827;
   border-radius: 20px;
   position: relative;
@@ -196,7 +232,6 @@
   justify-content: center;
 }
 
-/* FIX: FORCE VIDEO INSIDE CARD */
 .video-player video {
   width: 100% !important;
   height: 100% !important;
@@ -204,73 +239,166 @@
   border-radius: 20px;
 }
 
-/* ===== AVATAR ===== */
+/* =====================
+   AVATAR
+===================== */
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: clamp(52px, 8vw, 80px);
+  height: clamp(52px, 8vw, 80px);
   background: linear-gradient(135deg, #4f46e5, #6366f1);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: clamp(18px, 4vw, 28px);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-/* Hide avatar if video exists */
 .video-player video ~ .avatar {
   display: none;
 }
 
-/* ===== NAME TAG ===== */
+/* =====================
+   NAME TAG
+===================== */
 .name-tag {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
+  bottom: 10px;
+  left: 10px;
   background: rgba(0,0,0,0.65);
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: clamp(11px, 1.5vw, 13px);
   color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
 }
 
-/* ===== CONTROLS ===== */
+/* =====================
+   CONTROLS
+===================== */
 .controls {
-  height: 100px;
+  height: clamp(75px, 10vw, 100px);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: clamp(10px, 2vw, 25px);
   background: #0f172a;
   border-top: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
+  padding: 0 1rem;
+  flex-wrap: wrap;
 }
 
-/* BUTTONS */
 .controls button {
-  width: 60px;
-  height: 60px;
+  width: clamp(46px, 8vw, 60px);
+  height: clamp(46px, 8vw, 60px);
   border-radius: 16px;
   border: none;
   background: #1e293b;
   color: white;
-  font-size: 22px;
+  font-size: clamp(16px, 3vw, 22px);
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .controls button:hover {
   transform: scale(1.05);
 }
 
-/* PRIMARY */
 .control-btn.primary {
   background: #2563eb;
 }
 
-/* LEAVE BUTTON */
 .control-btn.leave {
   background: #dc2626;
+}
+
+/* =====================
+   RESPONSIVE — TABLET (max 900px)
+===================== */
+@media screen and (max-width: 900px) {
+  .join-container,
+  .join-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .join-left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .join-card {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .video-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+/* =====================
+   RESPONSIVE — MOBILE (max 600px)
+===================== */
+@media screen and (max-width: 600px) {
+  #join-screen {
+    padding: 5rem 4% 2rem;
+    align-items: flex-start;
+  }
+
+  .join-left h1 {
+    font-size: 1.4rem;
+  }
+
+  .join-card {
+    padding: 1.25rem;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .video-player {
+    max-width: 100%;
+    height: clamp(140px, 50vw, 220px);
+  }
+
+  .top-bar {
+    height: 52px;
+    padding: 0 1rem;
+  }
+
+  .controls {
+    height: auto;
+    padding: 0.75rem 1rem;
+    gap: 10px;
+  }
+}
+
+/* =====================
+   RESPONSIVE — EXTRA SMALL (max 360px)
+===================== */
+@media screen and (max-width: 360px) {
+  .controls button {
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .join-card h2 {
+    font-size: 1rem;
+  }
 }
