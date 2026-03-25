@@ -107,6 +107,7 @@
   font-family: "Poppins", sans-serif;
   font-size: 0.95rem;
   outline: none;
+  box-sizing: border-box;
 }
 
 .join-card input:focus,
@@ -159,18 +160,21 @@
   display: flex;
   flex-direction: column;
   z-index: 9999;
+  font-family: "Poppins", sans-serif;
 }
 
-/* TOP BAR */
+/* =====================
+   TOP BAR — matches screenshot exactly
+===================== */
 .top-bar {
-  height: 60px;
+  height: 56px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 clamp(1rem, 3vw, 30px);
+  padding: 0 clamp(1rem, 3vw, 28px);
   background: #0f172a;
   color: white;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   flex-shrink: 0;
 }
 
@@ -181,26 +185,65 @@
   overflow: hidden;
 }
 
-.meeting-info span {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 40vw;
-  font-size: clamp(0.8rem, 2vw, 1rem);
-}
-
-.live-badge {
-  color: #ef4444;
-  font-size: clamp(0.75rem, 1.5vw, 13px);
+.meeting-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6366f1;
   flex-shrink: 0;
 }
 
-.participants-count {
-  background: rgba(255,255,255,0.1);
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: clamp(0.75rem, 1.5vw, 13px);
+#meeting-name {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 35vw;
+  font-size: clamp(0.82rem, 1.8vw, 0.95rem);
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.live-badge {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+/* CENTER TIMER */
+.timer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+  font-weight: 500;
+  color: #94a3b8;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+/* PARTICIPANT COUNT */
+.participants-count {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: clamp(0.78rem, 1.5vw, 0.88rem);
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+
+.participants-count svg {
+  stroke: #94a3b8;
+  flex-shrink: 0;
 }
 
 /* =====================
@@ -209,56 +252,55 @@
 .video-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1rem, 2vw, 30px);
-  padding: clamp(1rem, 3vw, 40px);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(1rem, 2vw, 24px);
+  padding: clamp(1.5rem, 3vw, 40px);
   place-items: center;
   overflow-y: auto;
 }
 
 /* =====================
-   VIDEO CARD
+   VIDEO CARD — matches screenshot dark cards
 ===================== */
 .video-player {
   width: 100%;
-  max-width: 420px;
-  height: clamp(160px, 25vw, 240px);
+  max-width: 480px;
+  height: clamp(180px, 28vw, 280px);
   background: #111827;
-  border-radius: 20px;
+  border-radius: 16px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(255,255,255,0.04);
 }
 
 .video-player video {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: 16px;
 }
 
 /* =====================
-   AVATAR
+   AVATAR — circle with initial
 ===================== */
 .avatar {
-  width: clamp(52px, 8vw, 80px);
-  height: clamp(52px, 8vw, 80px);
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  width: clamp(56px, 9vw, 90px);
+  height: clamp(56px, 9vw, 90px);
+  background: linear-gradient(135deg, #6366f1, #818cf8);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(18px, 4vw, 28px);
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 600;
+  color: white;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.video-player video ~ .avatar {
-  display: none;
 }
 
 /* =====================
@@ -266,12 +308,13 @@
 ===================== */
 .name-tag {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(0,0,0,0.65);
-  padding: 5px 10px;
-  border-radius: 10px;
-  font-size: clamp(11px, 1.5vw, 13px);
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0,0,0,0.72);
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: clamp(11px, 1.4vw, 13px);
+  font-weight: 500;
   color: white;
   white-space: nowrap;
   overflow: hidden;
@@ -280,46 +323,106 @@
 }
 
 /* =====================
-   CONTROLS
+   CONTROLS — icon + label style as in screenshot
 ===================== */
 .controls {
-  height: clamp(75px, 10vw, 100px);
+  height: clamp(85px, 11vw, 110px);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(10px, 2vw, 25px);
+  gap: clamp(12px, 2.5vw, 28px);
   background: #0f172a;
   border-top: 1px solid rgba(255,255,255,0.05);
   flex-shrink: 0;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   flex-wrap: wrap;
 }
 
-.controls button {
-  width: clamp(46px, 8vw, 60px);
-  height: clamp(46px, 8vw, 60px);
-  border-radius: 16px;
+/* BASE CONTROL BUTTON */
+.control-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: clamp(68px, 10vw, 88px);
+  height: clamp(68px, 10vw, 88px);
+  border-radius: 14px;
   border: none;
   background: #1e293b;
-  color: white;
-  font-size: clamp(16px, 3vw, 22px);
+  color: #cbd5e1;
   cursor: pointer;
   transition: all 0.2s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.control-btn:hover {
+  background: #263549;
+  transform: translateY(-2px);
+}
+
+.btn-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
 }
 
-.controls button:hover {
-  transform: scale(1.05);
+.btn-icon svg {
+  stroke: currentColor;
 }
 
-.control-btn.primary {
+.btn-label {
+  font-size: clamp(9px, 1.2vw, 11px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: inherit;
+  white-space: nowrap;
+}
+
+/* MUTED — red bg, as shown in screenshot */
+.control-btn.muted {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.control-btn.muted:hover {
+  background: #991b1b;
+}
+
+/* VIDEO OFF — red bg */
+.control-btn.video-off {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.control-btn.video-off:hover {
+  background: #991b1b;
+}
+
+/* SHARE — blue */
+.share-btn {
+  background: #1d4ed8;
+  color: #bfdbfe;
+}
+
+.share-btn:hover {
   background: #2563eb;
 }
 
+.share-btn.sharing {
+  background: #1e40af;
+  color: #93c5fd;
+}
+
+/* LEAVE — red */
 .control-btn.leave {
-  background: #dc2626;
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.control-btn.leave:hover {
+  background: #991b1b;
 }
 
 /* =====================
@@ -373,12 +476,16 @@
 
   .video-player {
     max-width: 100%;
-    height: clamp(140px, 50vw, 220px);
+    height: clamp(160px, 52vw, 240px);
   }
 
   .top-bar {
-    height: 52px;
+    height: 50px;
     padding: 0 1rem;
+  }
+
+  .timer {
+    font-size: 0.82rem;
   }
 
   .controls {
@@ -386,16 +493,27 @@
     padding: 0.75rem 1rem;
     gap: 10px;
   }
+
+  .control-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+  }
 }
 
 /* =====================
    RESPONSIVE — EXTRA SMALL (max 360px)
 ===================== */
 @media screen and (max-width: 360px) {
-  .controls button {
-    width: 42px;
-    height: 42px;
-    font-size: 15px;
+  .control-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 13px;
+    gap: 3px;
+  }
+
+  .btn-label {
+    font-size: 9px;
   }
 
   .join-card h2 {

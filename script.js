@@ -180,6 +180,7 @@ function initMap() {
   }
 }
 
+
 // Expose globals needed by HTML attributes and external scripts
 window.toggleMenu = toggleMenu;
 window.initMap    = initMap;
