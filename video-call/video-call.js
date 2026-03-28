@@ -26,31 +26,73 @@ export default class VideoCall {
       <div class="join-wrapper">
 
         <div class="join-left">
-          <div class="logo">🎥 MicroSlikx</div>
+     <div class="splash">
+ 
+  <!-- Recreated Crolix logo in SVG: circular C with camera + chat -->
+  <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%"   stop-color="#4fa3f7"/>
+        <stop offset="100%" stop-color="#6c5ce7"/>
+      </linearGradient>
+      <linearGradient id="camGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%"   stop-color="#74b9ff"/>
+        <stop offset="100%" stop-color="#a29bfe"/>
+      </linearGradient>
+    </defs>
+ 
+    <!-- Outer C ring (arc from ~40° to ~320°) -->
+    <path d="
+      M 50 8
+      A 42 42 0 1 1 19.5 73
+      L 26 68
+      A 34 34 0 1 0 50 16 Z"
+      fill="url(#ringGrad)"
+    />
+ 
+    <!-- Camera body -->
+    <rect x="26" y="36" width="30" height="22" rx="4" fill="url(#camGrad)"/>
+    <!-- Camera lens -->
+    <circle cx="41" cy="47" r="7" fill="#0d1b2a"/>
+    <circle cx="41" cy="47" r="4.5" fill="url(#ringGrad)"/>
+    <!-- Camera viewfinder notch -->
+    <rect x="53" y="40" width="2" height="14" rx="1" fill="url(#camGrad)"/>
+    <!-- Video triangle (play arrow) -->
+    <polygon points="56,44 63,47 56,50" fill="url(#camGrad)"/>
+ 
+    <!-- Chat bubble tail at bottom-left -->
+    <path d="M 22 58 L 18 68 L 30 62" fill="url(#ringGrad)" opacity="0.85"/>
+  </svg>
+ 
+  <div class="logo-text">
+    <span class="crolix">Crolix</span>
+    <span class="meet">Meet</span>
+  </div>
 
-          <h1>Start or Join a Meeting</h1>
+</div>
+          <h1>Start or Join meeting</h1>
 
           <p class="subtitle">
-            Connect instantly with your team. Create a meeting, share your ID,
+            Connect instantly with your team. Create meeting, share your ID,
             and collaborate in real-time.
           </p>
 
           <ul class="features">
             <li>📌 Create your own meeting instantly</li>
-            <li>🔗 Share a unique Meeting ID</li>
+            <li>🔗 Share unique meeting ID</li>
             <li>👥 Join from anywhere</li>
             <li>⏰ Schedule and manage sessions easily</li>
           </ul>
         </div>
 
         <div class="join-card">
-          <h2>Join Meeting</h2>
-          <p class="small-text">Enter your name and a Meeting ID</p>
+          <h2>Join meeting</h2>
+          <p class="small-text">Enter your name and meeting ID</p>
 
           <label>YOUR NAME</label>
           <input id="username" placeholder="Enter your name" />
 
-          <label>MEETING ID</label>
+          <label>Meeting ID</label>
           <input id="channelName" placeholder="e.g team-standup-42" />
 
           <button id="joinBtn">Join Now</button>
@@ -69,7 +111,7 @@ export default class VideoCall {
       <div class="top-bar">
         <div class="meeting-info">
           <span class="meeting-dot"></span>
-          <span id="meeting-name">Meeting</span>
+          <span id="meeting-name">Chat</span>
           <span class="live-badge">● LIVE</span>
         </div>
 
@@ -158,7 +200,7 @@ export default class VideoCall {
     document.querySelector("header")?.style.setProperty("display", "none");
 
     if (!name || !channel) {
-      alert("Enter name and Meeting ID");
+      alert("Enter name and chat ID");
       return;
     }
 

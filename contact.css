@@ -427,3 +427,12 @@ footer .nav-links {
     padding: 1rem 0.75rem;
   }
 }
+.logo span {
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  background: linear-gradient(90deg, #4facfe, #7b61ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
