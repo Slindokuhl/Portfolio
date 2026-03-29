@@ -32,10 +32,10 @@
         <span></span>
       </div>
       <ul class="menu-links">
-        <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+        <li><a href="index.html"      onclick="toggleMenu()">Home</a></li>
         <li><a href="experience.html" onclick="toggleMenu()">Experience</a></li>
-        <li><a href="projects.html" onclick="toggleMenu()">Projects</a></li>
-        <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
+        <li><a href="projects.html"   onclick="toggleMenu()">Projects</a></li>
+        <li><a href="contact.html"    onclick="toggleMenu()">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -49,10 +49,10 @@
 
     <div class="projects-grid">
 
-      <!-- Project 1 -->
-      <div class="project-card animated-text">
+      <!-- Project 1: Student Performance System -->
+      <div class="project-card">
         <div class="project-img-wrapper">
-          <img src="./assets/project-1.png" alt="Student Performance System" class="project-img" />
+          <img src="./assets/project-1.png" alt="Student Performance System" class="project-img" loading="lazy" />
           <div class="project-overlay">
             <p class="project-description">A web-based system to track and manage student academic performance with real-time analytics.</p>
           </div>
@@ -64,24 +64,22 @@
             <span class="tag">Web App</span>
           </div>
           <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="window.open('https://github.com/', '_blank')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <a class="btn btn-color-2 project-btn" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
               GitHub
-            </button>
-            <button class="btn btn-color-1 project-btn" onclick="window.open('https://studentmanagementsytem-96ac6.web.app/login', '_blank')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+            <a class="btn btn-color-1 project-btn" href="https://studentmanagementsytem-96ac6.web.app/login" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Live Demo
-            </button>
+            </a>
           </div>
         </div>
       </div>
 
-     
-
-      <!-- Project 3 -->
-      <div class="project-card animated-text">
+      <!-- Project 2: Attendify -->
+      <div class="project-card">
         <div class="project-img-wrapper">
-          <img src="./assets/Attendify.png" alt="Attendify" class="project-img" />
+          <img src="./assets/Attendify.png" alt="Attendify" class="project-img" loading="lazy" />
           <div class="project-overlay">
             <p class="project-description">A smart attendance management application with QR code scanning and real-time reporting.</p>
           </div>
@@ -93,42 +91,41 @@
             <span class="tag">QR Code</span>
           </div>
           <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="window.open('https://github.com/', '_blank')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <a class="btn btn-color-2 project-btn" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
               GitHub
-            </button>
-            <button class="btn btn-color-1 project-btn" onclick="window.open('https://scholarship-832f3.web.app/', '_blank')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+            <a class="btn btn-color-1 project-btn" href="https://scholarship-832f3.web.app/" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Live Demo
-            </button>
+            </a>
           </div>
         </div>
       </div>
 
-       <!-- Project 4-->
-      <div class="project-card animated-text">
+      <!-- Project 3: Crolix Meet -->
+      <div class="project-card">
         <div class="project-img-wrapper">
-          <img src="./assets/project-3.png" alt="Intern Report Tracking" class="project-img" />
+          <img src="./assets/project-3.png" alt="Crolix Meet" class="project-img" loading="lazy" />
           <div class="project-overlay">
-            <p class="project-description">A online meeting that you can connect instantly with your team.
-                                           Create a meeting, share your ID, and collaborate in real-time.</p>
+            <p class="project-description">An online meeting app to connect instantly with your team. Create a meeting, share your ID, and collaborate in real-time.</p>
           </div>
         </div>
         <div class="project-info">
-          <h2 class="project-title">Crolix meet</h2>
+          <h2 class="project-title">Crolix Meet</h2>
           <div class="project-tags">
-            <span class="tag">AgoraSDK</span>
-            <span class="tag">Online-meeting</span>
+            <span class="tag">Agora SDK</span>
+            <span class="tag">Online Meeting</span>
           </div>
           <div class="btn-container">
-            <button class="btn btn-color-2 project-btn" onclick="window.open('https://github.com/', '_blank')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <a class="btn btn-color-2 project-btn" href="https://github.com/" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
               GitHub
-            </button>
-            <button class="btn btn-color-1 project-btn" onclick="window.open('http://127.0.0.1:5501/contact.html', '_blank')">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+            <a class="btn btn-color-1 project-btn" href="contact.html" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Live Demo
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -146,17 +143,43 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
-    <p class="footer-copy">Copyright &#169; 2025 Atlehang Ngidi. All Rights Reserved.</p>
+    <p class="footer-copy">Copyright &#169; 2025 Slindokuhle Ngidi. All Rights Reserved.</p>
   </footer>
 
   <script>
     function toggleMenu() {
-      const menu = document.querySelector(".menu-links");
-      const icon = document.querySelector(".hamburger-icon");
-      menu.classList.toggle("open");
-      icon.classList.toggle("open");
+      document.querySelector(".menu-links")?.classList.toggle("open");
+      document.querySelector(".hamburger-icon")?.classList.toggle("open");
     }
-  </script>
 
+    document.addEventListener("click", (e) => {
+      const menu      = document.querySelector(".menu-links");
+      const hamburger = document.querySelector(".hamburger-menu");
+      if (menu?.classList.contains("open") && !hamburger?.contains(e.target)) {
+        toggleMenu();
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      const bg = window.scrollY > 100 ? "rgba(173,216,230,0.98)" : "rgba(173,216,230,0.95)";
+      document.querySelector("#desktop-nav")  ?.style.setProperty("background-color", bg);
+      document.querySelector("#hamburger-nav")?.style.setProperty("background-color", bg);
+    }, { passive: true });
+
+    // Scroll reveal for project cards
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = (i * 0.12) + "s";
+          entry.target.classList.add("visible");
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".project-card").forEach(el => cardObserver.observe(el));
+
+    window.toggleMenu = toggleMenu;
+  </script>
 </body>
 </html>

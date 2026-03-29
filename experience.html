@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Experience - Slindokuhle Atlehang Ngidi</title>
   <link rel="stylesheet" href="experience.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -185,20 +185,16 @@
     <p>Copyright &#169; 2024 Slindokuhle Ngidi. All Rights Reserved.</p>
   </footer>
 
-
   <script>
     function toggleMenu() {
-      const menu = document.querySelector('.menu-links');
-      const icon = document.querySelector('.hamburger-icon');
-      menu.classList.toggle('open');
-      icon.classList.toggle('open');
+      document.querySelector('.menu-links').classList.toggle('open');
+      document.querySelector('.hamburger-icon').classList.toggle('open');
     }
 
-    // Scroll-triggered fade-in for articles and containers
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          entry.target.style.animationDelay = (i * 0.07) + 's';
+          entry.target.style.transitionDelay = (i * 0.07) + 's';
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }

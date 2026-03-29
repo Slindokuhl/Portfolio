@@ -1,26 +1,28 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
 
+/* =====================
+   AGORA VIDEO CALL
+===================== */
+const APP_ID = "8e65dc0cc41e48f28011f902cd8f3405";
+const TOKEN  = null; // Replace with token if required
+
 let client;
 let localTracks = [];
 
-const APP_ID = "8e65dc0cc41e48f28011f902cd8f3405";
-const TOKEN = null; // Replace with token if needed
-
 async function joinCall() {
-  try {
-    const channel = document.getElementById("channelName").value;
-    if (!channel) return alert("Enter meeting name");
+  const channel = document.getElementById("channelName")?.value.trim();
+  if (!channel) return alert("Enter a meeting name");
 
+  try {
     client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
     await client.join(APP_ID, channel, TOKEN, null);
-    console.log("Joined successfully");
 
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
 
-    const player = document.createElement("div");
-    player.id = "local-player";
-    player.className = "video-player";
-    document.getElementById("video-streams").appendChild(player);
+    const localPlayer = document.createElement("div");
+    localPlayer.id        = "local-player";
+    localPlayer.className = "video-player";
+    document.getElementById("video-streams").appendChild(localPlayer);
     localTracks[1].play("local-player");
 
     await client.publish(localTracks);
@@ -29,7 +31,7 @@ async function joinCall() {
       await client.subscribe(user, mediaType);
       if (mediaType === "video") {
         const remotePlayer = document.createElement("div");
-        remotePlayer.id = user.uid;
+        remotePlayer.id        = String(user.uid);
         remotePlayer.className = "video-player";
         document.getElementById("video-streams").appendChild(remotePlayer);
         user.videoTrack.play(remotePlayer);
@@ -38,44 +40,34 @@ async function joinCall() {
     });
 
   } catch (err) {
-    console.error(err);
+    console.error("Agora error:", err);
     alert("Error: " + err.message);
   }
 }
 
 async function leaveCall() {
-  for (let track of localTracks) {
-    track.stop();
-    track.close();
-  }
-  await client.leave();
+  localTracks.forEach(track => { track.stop(); track.close(); });
+  localTracks = [];
+  await client?.leave();
   document.getElementById("video-streams").innerHTML = "";
 }
 
-// Bind Agora buttons if they exist on the page
-const joinBtn = document.getElementById("joinBtn");
-const leaveBtn = document.getElementById("leaveBtn");
-if (joinBtn)  joinBtn.addEventListener("click", joinCall);
-if (leaveBtn) leaveBtn.addEventListener("click", leaveCall);
+document.getElementById("joinBtn")?.addEventListener("click", joinCall);
+document.getElementById("leaveBtn")?.addEventListener("click", leaveCall);
 
 /* =====================
    HAMBURGER MENU
 ===================== */
 function toggleMenu() {
-  const menu = document.querySelector(".menu-links");
-  const icon  = document.querySelector(".hamburger-icon");
-  if (menu) menu.classList.toggle("open");
-  if (icon) icon.classList.toggle("open");
+  document.querySelector(".menu-links")?.classList.toggle("open");
+  document.querySelector(".hamburger-icon")?.classList.toggle("open");
 }
 
-// Close mobile menu when clicking outside
-document.addEventListener("click", function (e) {
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
   const menu      = document.querySelector(".menu-links");
   const hamburger = document.querySelector(".hamburger-menu");
-
-  if (!menu || !hamburger) return;
-
-  if (!hamburger.contains(e.target) && menu.classList.contains("open")) {
+  if (menu?.classList.contains("open") && !hamburger?.contains(e.target)) {
     toggleMenu();
   }
 });
@@ -85,9 +77,9 @@ document.addEventListener("click", function (e) {
 ===================== */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function (e) {
-    e.preventDefault();
     const target = document.querySelector(this.getAttribute("href"));
     if (target) {
+      e.preventDefault();
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   });
@@ -96,44 +88,33 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 /* =====================
    NAVIGATION SCROLL EFFECT
 ===================== */
-window.addEventListener("scroll", function () {
-  const nav           = document.querySelector("#desktop-nav");
-  const hamburgerNav  = document.querySelector("#hamburger-nav");
+window.addEventListener("scroll", () => {
+  const bg = window.scrollY > 100
+    ? "rgba(173, 216, 230, 0.98)"
+    : "rgba(173, 216, 230, 0.95)";
 
-  if (nav) {
-    nav.style.backgroundColor = window.scrollY > 100
-      ? "rgba(173, 216, 230, 0.98)"
-      : "rgba(173, 216, 230, 0.95)";
-  }
-  if (hamburgerNav) {
-    hamburgerNav.style.backgroundColor = window.scrollY > 100
-      ? "rgba(173, 216, 230, 0.98)"
-      : "rgba(173, 216, 230, 0.95)";
-  }
-});
+  document.querySelector("#desktop-nav")  ?.style.setProperty("background-color", bg);
+  document.querySelector("#hamburger-nav")?.style.setProperty("background-color", bg);
+}, { passive: true });
 
 /* =====================
-   INTERSECTION OBSERVER — SCROLL ANIMATIONS
+   SCROLL ANIMATIONS
 ===================== */
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: "0px 0px -50px 0px"
-};
-
-const observer = new IntersectionObserver(function (entries) {
+const scrollObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.style.opacity   = "1";
       entry.target.style.transform = "translateY(0)";
+      scrollObserver.unobserve(entry.target);
     }
   });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
 document.querySelectorAll(".details-container, .color-container").forEach(el => {
   el.style.opacity    = "0";
   el.style.transform  = "translateY(20px)";
   el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-  observer.observe(el);
+  scrollObserver.observe(el);
 });
 
 /* =====================
@@ -141,46 +122,9 @@ document.querySelectorAll(".details-container, .color-container").forEach(el => 
 ===================== */
 document.body.style.opacity    = "0";
 document.body.style.transition = "opacity 0.3s ease";
-
-window.addEventListener("load", function () {
-  document.body.style.opacity = "1";
-});
+window.addEventListener("load", () => { document.body.style.opacity = "1"; });
 
 /* =====================
-   GOOGLE MAPS
+   GLOBALS
 ===================== */
-let map;
-
-function initMap() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const userLocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-
-        map = new google.maps.Map(document.getElementById("map"), {
-          center: userLocation,
-          zoom: 14
-        });
-
-        new google.maps.Marker({
-          position: userLocation,
-          map: map,
-          title: "You are here!"
-        });
-      },
-      () => {
-        alert("Geolocation failed. Allow location access.");
-      }
-    );
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
-}
-
-
-// Expose globals needed by HTML attributes and external scripts
 window.toggleMenu = toggleMenu;
-window.initMap    = initMap;

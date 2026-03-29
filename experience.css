@@ -1,9 +1,8 @@
 /* ============================================================
-   EXPERIENCE.CSS — Fully Responsive, Production-Grade
+   EXPERIENCE.CSS — Optimised & Cleaned
    ============================================================ */
 
-/* FONTS */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
 /* RESET & BASE */
 *, *::before, *::after {
@@ -14,7 +13,6 @@
 
 :root {
   --bg: #ADD8E6;
-  --bg-light: #c8e8f2;
   --card-bg: rgba(255, 255, 255, 0.72);
   --card-border: rgba(255, 255, 255, 0.9);
   --text-dark: #1a1a2e;
@@ -52,7 +50,10 @@ body {
 
 p { color: var(--text-soft); }
 
-a { transition: all 0.3s ease; text-decoration: none; }
+a {
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
 
 /* ============================================================
    NAVIGATION — DESKTOP
@@ -93,7 +94,6 @@ a { transition: all 0.3s ease; text-decoration: none; }
   color: var(--text-mid);
   font-weight: 500;
   font-size: clamp(0.85rem, 1.2vw, 1rem);
-  letter-spacing: 0.01em;
   position: relative;
   padding-bottom: 4px;
 }
@@ -111,9 +111,7 @@ a { transition: all 0.3s ease; text-decoration: none; }
 }
 
 .nav-links a:hover::after,
-.nav-links a.active::after {
-  width: 100%;
-}
+.nav-links a.active::after { width: 100%; }
 
 .nav-links a.active {
   color: var(--accent);
@@ -174,7 +172,6 @@ a { transition: all 0.3s ease; text-decoration: none; }
   overflow: hidden;
   transition: max-height 0.35s ease, box-shadow 0.3s ease;
   border-radius: 14px;
-  box-shadow: none;
 }
 
 .menu-links.open {
@@ -192,10 +189,10 @@ a { transition: all 0.3s ease; text-decoration: none; }
   font-size: 0.95rem;
   font-weight: 500;
   border-bottom: 1px solid #f0f0f0;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, padding-left 0.2s;
 }
 
-.menu-links a:last-of-type { border-bottom: none; }
+.menu-links li:last-child a { border-bottom: none; }
 
 .menu-links a:hover {
   background-color: #f5fbff;
@@ -204,7 +201,7 @@ a { transition: all 0.3s ease; text-decoration: none; }
 }
 
 /* ============================================================
-   SECTION
+   EXPERIENCE SECTION
    ============================================================ */
 #experience {
   min-height: 100vh;
@@ -329,7 +326,6 @@ a { transition: all 0.3s ease; text-decoration: none; }
 
 article {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 0.7rem;
   padding: 0.75rem 0.9rem;
@@ -340,7 +336,6 @@ article {
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   position: relative;
   overflow: hidden;
-  /* fade-up initial state handled by JS */
 }
 
 article::before {
@@ -350,7 +345,6 @@ article::before {
   background: linear-gradient(135deg, rgba(214,51,132,0.06) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s ease;
-  border-radius: inherit;
   pointer-events: none;
 }
 
@@ -398,7 +392,6 @@ article:hover .icon { transform: scale(1.15) rotate(-4deg); }
   margin-top: 1px;
 }
 
-/* Level indicator dot */
 .level-dot {
   width: 8px;
   height: 8px;
@@ -418,12 +411,6 @@ article:hover .icon { transform: scale(1.15) rotate(-4deg); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* JS-powered scroll reveal */
 .fade-up {
   opacity: 0;
   transform: translateY(24px);
@@ -436,13 +423,30 @@ article:hover .icon { transform: scale(1.15) rotate(-4deg); }
 }
 
 /* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: rgba(255,255,255,0.85);
+  padding: 2rem 5%;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+footer .nav-links {
+  justify-content: center;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
    RESPONSIVE — Tablets (≤ 900px)
    ============================================================ */
 @media screen and (max-width: 900px) {
   .about-containers {
     grid-template-columns: 1fr;
   }
-
   .article-container {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   }
@@ -452,13 +456,12 @@ article:hover .icon { transform: scale(1.15) rotate(-4deg); }
    RESPONSIVE — Mobile (≤ 768px)
    ============================================================ */
 @media screen and (max-width: 768px) {
-  #desktop-nav  { display: none; }
+  #desktop-nav   { display: none; }
   #hamburger-nav { display: flex; }
 
   #experience {
     padding: calc(var(--nav-h) + 36px) 4% 60px;
   }
-
   .article-container {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -471,24 +474,17 @@ article:hover .icon { transform: scale(1.15) rotate(-4deg); }
   #experience {
     padding: calc(var(--nav-h) + 28px) 4% 48px;
   }
-
-  .details-container {
-    padding: 1.2rem;
-  }
-
+  .details-container { padding: 1.2rem; }
   .article-container {
     grid-template-columns: 1fr 1fr;
     gap: 0.7rem;
   }
-
   article {
     padding: 0.65rem 0.75rem;
     gap: 0.55rem;
   }
-
   .icon-wrap { width: 28px; height: 28px; }
   .icon      { width: 24px; height: 24px; }
-
   .experience-sub-title { font-size: 1.1rem; }
 }
 
@@ -496,26 +492,6 @@ article:hover .icon { transform: scale(1.15) rotate(-4deg); }
    RESPONSIVE — Very Small (≤ 360px)
    ============================================================ */
 @media screen and (max-width: 360px) {
-  .article-container {
-    grid-template-columns: 1fr;
-  }
-
+  .article-container { grid-template-columns: 1fr; }
   .logo { font-size: 1rem; }
-}
-
-/* ============================================================
-   FOOTER (if used)
-   ============================================================ */
-footer {
-  background: rgba(255,255,255,0.85);
-  padding: 2rem 5%;
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.6);
-  backdrop-filter: blur(8px);
-}
-
-footer .nav-links {
-  justify-content: center;
-  margin-bottom: 0.8rem;
-  flex-wrap: wrap;
 }
