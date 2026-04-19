@@ -128,3 +128,13 @@ window.addEventListener("load", () => { document.body.style.opacity = "1"; });
    GLOBALS
 ===================== */
 window.toggleMenu = toggleMenu;
+function speakText() {
+  const text = document.getElementById('myText').value;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 1; // speed
+  window.speechSynthesis.speak(utterance);
+}
+
+// Attach to a button:
+// <button onclick="speakText()">Read aloud</button>
+// <textarea id="myText">Your text here</textarea>

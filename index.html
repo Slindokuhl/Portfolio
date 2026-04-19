@@ -8,6 +8,120 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css" />
   <title>Slindokuhle Atlehang Ngidi</title>
+
+  <style>
+    #chat-bubble {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #4f46e5;
+      color: white;
+      font-size: 26px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(79,70,229,0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    #chat-bubble:hover { transform: scale(1.08); }
+
+    #chat-widget {
+      position: fixed;
+      bottom: 96px;
+      right: 28px;
+      width: 340px;
+      max-height: 480px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      display: none;
+      flex-direction: column;
+      z-index: 9998;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
+    #chat-widget.open { display: flex; }
+
+    #chat-header {
+      background: #4f46e5;
+      color: white;
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #chat-header span { font-size: 20px; }
+    #chat-header small { display: block; font-weight: 400; font-size: 11px; opacity: 0.85; }
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #f8f8fb;
+    }
+
+    .msg {
+      max-width: 80%;
+      padding: 9px 13px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .msg.bot {
+      background: #fff;
+      color: #222;
+      border: 1px solid #e5e7eb;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .msg.user {
+      background: #4f46e5;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .msg.typing { color: #888; font-style: italic; }
+
+    #chat-input-row {
+      display: flex;
+      padding: 10px;
+      gap: 8px;
+      border-top: 1px solid #e5e7eb;
+      background: #fff;
+    }
+    #chat-input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Poppins', sans-serif;
+      outline: none;
+    }
+    #chat-input:focus { border-color: #4f46e5; }
+    #chat-send {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+    #chat-send:hover { background: #4338ca; }
+  </style>
 </head>
 <body>
 
@@ -71,7 +185,7 @@
           </div>
         </div>
         <div class="about-description">
-          <p>As a qualified professional Software Developer with 4 years  of academic  experience in Diploma Mangosuthu University of Technology,
+          <p>As a qualified professional Software Developer with 4 years of academic experience in Diploma Mangosuthu University of Technology,
             I bring a robust combination of theoretical knowledge and practical expertise.
             My 12 months internship at the University's Innovation Lab has equipped me with hands-on experience in developing innovative solutions and working on real-world projects.</p>
         </div>
@@ -86,6 +200,7 @@
         <div class="btn-container">
           <button class="btn btn-color-2" onclick="window.open('./assets/Slindokuhle_Atlehang_Ngidi_CV.pdf')">Download CV</button>
           <button class="btn btn-color-1" onclick="location.href='contact.html'">Contact Info</button>
+          <button class="btn btn-color-2" id="readBtn" onclick="readAloud()">🔊 Read About Me</button>
         </div>
       </div>
     </div>
@@ -104,7 +219,27 @@
     <p>Copyright &#169; 2024 Slindokuhle Ngidi. All Rights Reserved.</p>
   </footer>
 
-  
+  <!-- CHAT BUBBLE -->
+  <button id="chat-bubble" onclick="toggleChat()" title="Chat with Slindo's AI">💬</button>
+
+  <!-- CHAT WIDGET -->
+  <div id="chat-widget">
+    <div id="chat-header">
+      <span>🤖</span>
+      <div>
+        <div>Slindo's AI Assistant</div>
+        <small>Ask me anything about Slindokuhle</small>
+      </div>
+    </div>
+    <div id="chat-messages">
+      <div class="msg bot">Hey there! 👋 I'm Slindo's AI assistant. Ask me anything about his skills, projects, or experience!</div>
+    </div>
+    <div id="chat-input-row">
+      <input id="chat-input" type="text" placeholder="Ask something..." onkeydown="if(event.key==='Enter') sendMessage()" />
+      <button id="chat-send" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
   <script>
     function toggleMenu() {
       const menu = document.querySelector('.menu-links');
@@ -112,8 +247,74 @@
       menu.classList.toggle('open');
       icon.classList.toggle('open');
     }
-    </script>
 
+    function readAloud() {
+      const btn = document.getElementById('readBtn');
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        btn.textContent = '🔊 Read About Me';
+        return;
+      }
+      const text = `Hi, I'm Slindokuhle Atlehang Ngidi, a Full Stack Developer. 
+        I build modern, responsive, and scalable web applications. 
+        Passionate about creating solutions that make real-world impact. 
+        I have 12 months of frontend and backend development experience. 
+        I hold a Diploma in IT from Mangosuthu University of Technology, 
+        where I also completed a 12-month internship at the University's Innovation Lab, 
+        working on real-world projects and innovative solutions.`;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.95;
+      utterance.pitch = 1;
+      utterance.lang = 'en-ZA';
+      btn.textContent = '⏹ Stop Reading';
+      utterance.onend = () => { btn.textContent = '🔊 Read About Me'; };
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function toggleChat() {
+      const widget = document.getElementById('chat-widget');
+      widget.classList.toggle('open');
+      if (widget.classList.contains('open')) {
+        document.getElementById('chat-input').focus();
+      }
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('chat-input');
+      const messages = document.getElementById('chat-messages');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const userMsg = document.createElement('div');
+      userMsg.className = 'msg user';
+      userMsg.textContent = text;
+      messages.appendChild(userMsg);
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+
+      const typing = document.createElement('div');
+      typing.className = 'msg bot typing';
+      typing.textContent = 'Thinking...';
+      messages.appendChild(typing);
+      messages.scrollTop = messages.scrollHeight;
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        typing.className = 'msg bot';
+        typing.textContent = data.reply || 'Sorry, I could not get a response.';
+      } catch (err) {
+        typing.className = 'msg bot';
+        typing.textContent = 'Something went wrong. Please try again.';
+      }
+
+      messages.scrollTop = messages.scrollHeight;
+    }
+  </script>
 
   <script src="script.js"></script>
 </body>
