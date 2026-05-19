@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Phone, Github } from "lucide-react";
+import { Mail, Linkedin, Phone, Github, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -136,6 +136,56 @@ export function Contact() {
             </form>
           </motion.div>
         </div>
+
+        {/* ── Crolix Meet Video Call Section ─────────────────────────── */}
+        <motion.div
+          id="video-call"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7 }}
+          className="mt-28 max-w-5xl mx-auto"
+        >
+          {/* Section header */}
+          <div className="flex flex-col items-center text-center mb-10">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
+                <Video size={18} />
+              </div>
+              <span className="text-primary font-medium tracking-wider uppercase text-sm">Live Demo</span>
+            </div>
+            <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4">
+              Crolix Meet — Video Call
+            </h3>
+            <p className="text-muted-foreground max-w-xl text-base leading-relaxed">
+              Experience Crolix Meet directly in the browser. Enter a name, create or share a meeting ID, and connect instantly via real-time video.
+            </p>
+          </div>
+
+          {/* Gold accent line */}
+          <div className="h-px w-24 bg-primary mx-auto mb-10 rounded-full opacity-60" />
+
+          {/* iframe wrapper */}
+          <div className="relative rounded-2xl overflow-hidden border border-border shadow-2xl bg-[#020617]"
+               style={{ height: "720px" }}>
+            {/* Subtle gold corner glow */}
+            <div className="absolute top-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+            <iframe
+              src="/crolix-meet.html"
+              title="Crolix Meet — Live Video Call"
+              allow="camera; microphone; display-capture; fullscreen"
+              className="w-full h-full border-0 relative z-10"
+              style={{ display: "block" }}
+            />
+          </div>
+
+          {/* Hint row */}
+          <p className="text-center text-xs text-muted-foreground/60 mt-4">
+            Camera &amp; microphone access required · Works best in Chrome or Edge
+          </p>
+        </motion.div>
       </div>
     </section>
   );

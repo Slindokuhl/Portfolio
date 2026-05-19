@@ -23,7 +23,7 @@ const PROJECTS = [
     title: "Crolix Meet",
     description: "Online meeting app for real-time team collaboration. Features high-quality video and audio streaming built on top of Agora SDK.",
     tags: ["WebRTC", "Agora SDK", "Online Meeting", "Collaboration"],
-    liveUrl: "#contact",
+    liveUrl: "/contact",
     githubUrl: "https://github.com/slindokuhle",
     image: "/images/crolix-meet.png"
   }
