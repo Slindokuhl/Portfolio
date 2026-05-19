@@ -11,6 +11,8 @@ export function Contact() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
+
+        {/* ── Page heading ──────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,14 +25,64 @@ export function Contact() {
             Get In Touch
           </h2>
           <p className="text-lg text-muted-foreground">
-            I'm currently looking for new opportunities. Whether you have a question, a project idea, or just want to say hi, my inbox is always open.
+            Jump into a live video call or drop me a message below — I'm always open to new opportunities and conversations.
           </p>
         </motion.div>
 
+        {/* ── Crolix Meet Video Call — shown FIRST ─────────────── */}
+        <motion.div
+          id="video-call"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.7 }}
+          className="max-w-5xl mx-auto mb-28"
+        >
+          {/* Section header */}
+          <div className="flex flex-col items-center text-center mb-10">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
+                <Video size={18} />
+              </div>
+              <span className="text-primary font-medium tracking-wider uppercase text-sm">Live Demo</span>
+            </div>
+            <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4">
+              Crolix Meet — Video Call
+            </h3>
+            <p className="text-muted-foreground max-w-xl text-base leading-relaxed">
+              Experience Crolix Meet directly in the browser. Enter a name, create or share a meeting ID, and connect instantly via real-time video.
+            </p>
+          </div>
+
+          {/* Gold accent line */}
+          <div className="h-px w-24 bg-primary mx-auto mb-10 rounded-full opacity-60" />
+
+          {/* iframe wrapper */}
+          <div
+            className="relative rounded-2xl overflow-hidden border border-border shadow-2xl bg-[#020617]"
+            style={{ height: "720px" }}
+          >
+            <div className="absolute top-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+            <iframe
+              src="/crolix-meet.html"
+              title="Crolix Meet — Live Video Call"
+              allow="camera; microphone; display-capture; fullscreen"
+              className="w-full h-full border-0 relative z-10"
+              style={{ display: "block" }}
+            />
+          </div>
+
+          <p className="text-center text-xs text-muted-foreground/60 mt-4">
+            Camera &amp; microphone access required · Works best in Chrome or Edge
+          </p>
+        </motion.div>
+
+        {/* ── Contact details + form below the video ────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-5xl mx-auto">
           {/* Contact Info Cards */}
           <div className="lg:col-span-2 space-y-4">
-            <motion.a 
+            <motion.a
               href="mailto:slindokuhleatlehang1998@gmail.com"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -47,7 +99,7 @@ export function Contact() {
               </div>
             </motion.a>
 
-            <motion.a 
+            <motion.a
               href="https://linkedin.com/in/slindokuhle-ngidi-691b8137"
               target="_blank"
               rel="noopener noreferrer"
@@ -66,7 +118,7 @@ export function Contact() {
               </div>
             </motion.a>
 
-            <motion.a 
+            <motion.a
               href="tel:+27848038960"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -83,7 +135,7 @@ export function Contact() {
               </div>
             </motion.a>
 
-            <motion.a 
+            <motion.a
               href="https://github.com/Slindokuhl"
               target="_blank"
               rel="noopener noreferrer"
@@ -104,7 +156,7 @@ export function Contact() {
           </div>
 
           {/* Contact Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -136,56 +188,6 @@ export function Contact() {
             </form>
           </motion.div>
         </div>
-
-        {/* ── Crolix Meet Video Call Section ─────────────────────────── */}
-        <motion.div
-          id="video-call"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
-          className="mt-28 max-w-5xl mx-auto"
-        >
-          {/* Section header */}
-          <div className="flex flex-col items-center text-center mb-10">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <div className="h-10 w-10 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
-                <Video size={18} />
-              </div>
-              <span className="text-primary font-medium tracking-wider uppercase text-sm">Live Demo</span>
-            </div>
-            <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-              Crolix Meet — Video Call
-            </h3>
-            <p className="text-muted-foreground max-w-xl text-base leading-relaxed">
-              Experience Crolix Meet directly in the browser. Enter a name, create or share a meeting ID, and connect instantly via real-time video.
-            </p>
-          </div>
-
-          {/* Gold accent line */}
-          <div className="h-px w-24 bg-primary mx-auto mb-10 rounded-full opacity-60" />
-
-          {/* iframe wrapper */}
-          <div className="relative rounded-2xl overflow-hidden border border-border shadow-2xl bg-[#020617]"
-               style={{ height: "720px" }}>
-            {/* Subtle gold corner glow */}
-            <div className="absolute top-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-
-            <iframe
-              src="/crolix-meet.html"
-              title="Crolix Meet — Live Video Call"
-              allow="camera; microphone; display-capture; fullscreen"
-              className="w-full h-full border-0 relative z-10"
-              style={{ display: "block" }}
-            />
-          </div>
-
-          {/* Hint row */}
-          <p className="text-center text-xs text-muted-foreground/60 mt-4">
-            Camera &amp; microphone access required · Works best in Chrome or Edge
-          </p>
-        </motion.div>
       </div>
     </section>
   );
