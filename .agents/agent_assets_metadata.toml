@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "gou6-h9D1EHebtTpv0PEu"
+uri = "file://artifacts/portfolio/public/images/student-performance.png"
+type = "image"
+title = "Student Performance Analytics Dashboard"
+
+[[generated]]
+id = "7QvLFZCm6_7kXXPK_b8Wk"
+uri = "file://artifacts/portfolio/public/images/attendify.png"
+type = "image"
+title = "Smart Attendance QR App"
+
+[[generated]]
+id = "TiXO9SdJa6cocaGolEG0I"
+uri = "file://artifacts/portfolio/public/images/crolix-meet.png"
+type = "image"
+title = "Crolix Meet Online Meeting"
