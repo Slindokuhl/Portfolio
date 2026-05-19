@@ -31,7 +31,7 @@ export function Contact() {
           {/* Contact Info Cards */}
           <div className="lg:col-span-2 space-y-4">
             <motion.a 
-              href="mailto:slindokuhleatlehang22009757@gmail.com"
+              href="mailto:slindokuhleatlehang1998@gmail.com"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -43,12 +43,12 @@ export function Contact() {
               </div>
               <div className="overflow-hidden">
                 <p className="text-sm text-muted-foreground">Email</p>
-                <p className="font-medium text-foreground truncate">slindokuhleatlehang22009757@gmail.com</p>
+                <p className="font-medium text-foreground truncate">slindokuhleatlehang1998@gmail.com</p>
               </div>
             </motion.a>
 
             <motion.a 
-              href="https://www.linkedin.com/in/slindokuhle-ngidi-69181b217"
+              href="https://linkedin.com/in/slindokuhle-ngidi-691b8137"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, x: -30 }}
@@ -84,7 +84,7 @@ export function Contact() {
             </motion.a>
 
             <motion.a 
-              href="https://github.com/slindokuhle"
+              href="https://github.com/Slindokuhl"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, x: -30 }}
@@ -98,7 +98,7 @@ export function Contact() {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">GitHub</p>
-                <p className="font-medium text-foreground truncate">@slindokuhle</p>
+                <p className="font-medium text-foreground truncate">@Slindokuhl</p>
               </div>
             </motion.a>
           </div>
