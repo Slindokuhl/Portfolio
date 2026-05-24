@@ -1,4 +1,0 @@
-packages:
-  - 'artifacts/portfolio'
-allowBuilds:
-  esbuild: true
