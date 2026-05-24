@@ -42,7 +42,7 @@ export function Projects() {
         >
           <div>
             <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">
-              <span className="text-primary">02.</span> Selected Work
+              <span className="text-primary"></span> Selected Work
             </h2>
             <div className="h-px w-full bg-border max-w-md"></div>
           </div>
