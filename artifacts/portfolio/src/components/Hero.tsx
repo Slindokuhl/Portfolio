@@ -1,59 +1,56 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Download, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { useEffect, useState } from "react";
-
-function useKzdDuration() {
-  const [duration, setDuration] = useState("");
-
-  useEffect(() => {
-    const start = new Date("2026-04-07");
-
-    function update() {
-      const now = new Date();
-      const diff = now.getTime() - start.getTime();
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const months = Math.floor(days / 30);
-      const remainingDays = days % 30;
-      if (months > 0) {
-        setDuration(`${months}m ${remainingDays}d`);
-      } else {
-        setDuration(`${days}d`);
-      }
-    }
-
-    update();
-    const interval = setInterval(update, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return duration;
-}
+import { useRef } from "react";
+import { StatCounter } from "@/components/motion/StatCounter";
+import { GlowCard } from "@/components/motion/GlowCard";
+import { staggerContainer, revealItem, EASE_CINEMATIC } from "@/lib/motion";
+import { useKzdDuration } from "@/hooks/useKzdDuration";
 
 export function Hero() {
   const kzdDuration = useKzdDuration();
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageWrapRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const springTiltX = useSpring(tiltX, { stiffness: 150, damping: 20 });
+  const springTiltY = useSpring(tiltY, { stiffness: 150, damping: 20 });
+
+  function handleImageMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = imageWrapRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    tiltY.set(x * 12);
+    tiltX.set(-y * 12);
+  }
+
+  function handleImageMouseLeave() {
+    tiltX.set(0);
+    tiltY.set(0);
+  }
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden"
     >
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-[700px] h-[700px] bg-primary/10 rounded-full blur-[130px]" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-900/15 rounded-full blur-[100px]" />
-      </div>
-
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
-          <div className="flex-1 max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-3 mb-6"
-            >
+          <motion.div
+            className="flex-1 max-w-2xl"
+            initial="hidden"
+            animate="show"
+            variants={staggerContainer(0.12)}
+          >
+            <motion.div variants={revealItem} className="flex items-center gap-3 mb-6">
               <div className="h-px w-12 bg-primary" />
               <span className="text-primary font-medium tracking-wider uppercase text-sm">
                 Portfolio 2025
@@ -61,10 +58,8 @@ export function Hero() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-bold leading-[1.05] text-foreground mb-4"
+              variants={revealItem}
+              className="font-serif text-display font-bold leading-[1.05] text-foreground mb-4"
             >
               Slindokuhle
               <br />
@@ -76,34 +71,29 @@ export function Hero() {
             </motion.h1>
 
             <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              variants={revealItem}
               className="text-xl md:text-2xl text-muted-foreground font-medium mb-6 tracking-wide"
             >
               Full Stack Developer
             </motion.h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed mb-10"
-            >
+            <motion.p variants={revealItem} className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed mb-6">
               Results-driven developer building scalable academic platforms and real-time
               communication systems. Delivered solutions that reduced manual workloads by ~40%
               and reached students university-wide.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-wrap gap-4 mb-10"
-            >
+            <motion.div variants={revealItem} className="flex items-center gap-3 mb-10">
+              <StatCounter value={40} suffix="%" valueClassName="text-3xl" duration={1.5} />
+              <span className="text-sm text-muted-foreground max-w-[14rem] leading-snug">
+                manual workload reduction
+              </span>
+            </motion.div>
+
+            <motion.div variants={revealItem} className="flex flex-wrap gap-4 mb-10">
               <Button
                 size="lg"
-                className="h-13 px-8 text-base group bg-primary text-primary-foreground hover:bg-primary/90"
+                className="h-13 px-8 text-base group bg-primary text-primary-foreground hover:bg-primary/90 shadow-[var(--shadow-glow-primary)]"
                 asChild
               >
                 <Link href="/projects">
@@ -124,12 +114,7 @@ export function Hero() {
               </Button>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="flex items-center gap-5"
-            >
+            <motion.div variants={revealItem} className="flex items-center gap-5">
               <a
                 href="https://github.com/Slindokuhl"
                 target="_blank"
@@ -151,41 +136,53 @@ export function Hero() {
                 Amanzimtoti, KwaZulu-Natal, ZA
               </span>
             </motion.div>
-          </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.3, ease: EASE_CINEMATIC }}
+            style={{ y: parallaxY }}
             className="flex-shrink-0 relative mt-8 lg:mt-0"
           >
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-blue-500/20 blur-xl scale-110 pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 via-transparent to-glow-cyan/20 blur-xl scale-110 pointer-events-none" />
 
-            <div className="relative rounded-2xl p-[2px] bg-gradient-to-br from-primary via-primary/40 to-transparent shadow-2xl">
-              <div className="rounded-2xl overflow-hidden w-[260px] md:w-[300px] lg:w-[340px] bg-card">
-                <img
-                  src="/profile.png"
-                  alt="Slindokuhle Atlehang Ngidi"
-                  className="w-full object-cover object-top"
-                  style={{ height: "380px", objectPosition: "50% 8%" }}
-                />
-              </div>
+            <div
+              ref={imageWrapRef}
+              onMouseMove={handleImageMouseMove}
+              onMouseLeave={handleImageMouseLeave}
+              style={{ perspective: 800 }}
+              className="relative"
+            >
+              <motion.div
+                style={{ rotateX: springTiltX, rotateY: springTiltY, transformStyle: "preserve-3d" }}
+                className="relative rounded-2xl p-[2px] bg-gradient-to-br from-primary via-primary/40 to-transparent shadow-[var(--shadow-xl)]"
+              >
+                <div className="rounded-2xl overflow-hidden w-[260px] md:w-[300px] lg:w-[340px] bg-card">
+                  <img
+                    src="/profile.png"
+                    alt="Slindokuhle Atlehang Ngidi"
+                    className="w-full object-cover object-top"
+                    style={{ height: "380px", objectPosition: "50% 8%" }}
+                  />
+                </div>
+              </motion.div>
             </div>
 
-            <motion.div
+            <GlowCard
               animate={{ y: [0, -6, 0] }}
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              className="absolute -bottom-4 -left-6 bg-card border border-border rounded-xl px-4 py-3 shadow-xl"
+              className="absolute -bottom-4 -left-6 px-4 py-3"
             >
               <p className="text-xs text-muted-foreground font-medium">🎓 Innovation Lab</p>
               <p className="text-sm font-bold text-foreground">MUT Intern</p>
               <p className="text-xs text-primary font-medium mt-0.5">12 Months</p>
-            </motion.div>
+            </GlowCard>
 
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -top-4 -right-6 bg-primary rounded-xl px-4 py-3 shadow-xl"
+              className="absolute -top-4 -right-6 bg-primary rounded-xl px-4 py-3 shadow-[var(--shadow-glow-primary)]"
             >
               <p className="text-xs text-primary-foreground/70 font-medium">💼 KZD Solutions</p>
               <p className="text-sm font-bold text-primary-foreground">Intern</p>

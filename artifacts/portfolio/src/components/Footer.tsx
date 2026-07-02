@@ -1,9 +1,17 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
+import { fadeUp } from "@/lib/motion";
 
 export function Footer() {
   return (
-    <footer className="py-10 border-t border-border bg-background">
+    <motion.footer
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
+      variants={fadeUp}
+      className="py-10 border-t border-border bg-background"
+    >
       <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex flex-col items-center md:items-start">
           <Link href="/" className="font-serif font-bold text-xl text-foreground mb-2">
@@ -36,7 +44,7 @@ export function Footer() {
             href="https://github.com/Slindokuhl"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
+            className="text-muted-foreground hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)] transition-all"
           >
             <Github size={20} />
             <span className="sr-only">GitHub</span>
@@ -45,20 +53,20 @@ export function Footer() {
             href="https://linkedin.com/in/slindokuhle-ngidi-691b8137"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-primary transition-colors"
+            className="text-muted-foreground hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)] transition-all"
           >
             <Linkedin size={20} />
             <span className="sr-only">LinkedIn</span>
           </a>
           <a
             href="mailto:slindokuhleatlehang1998@gmail.com"
-            className="text-muted-foreground hover:text-primary transition-colors"
+            className="text-muted-foreground hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)] transition-all"
           >
             <Mail size={20} />
             <span className="sr-only">Email</span>
           </a>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

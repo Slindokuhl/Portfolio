@@ -1,27 +1,86 @@
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Phone, Github, Video } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Mail, Linkedin, Phone, Github, Video, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { GlowCard } from "@/components/motion/GlowCard";
+import { fadeUp } from "@/lib/motion";
+import { useToast } from "@/hooks/use-toast";
+
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined;
+
+const contactSchema = z.object({
+  name: z.string().min(2, "Please enter your name"),
+  email: z.string().email("Please enter a valid email"),
+  subject: z.string().min(2, "Please add a subject"),
+  message: z.string().min(10, "Message should be at least 10 characters"),
+});
+
+type ContactFormValues = z.infer<typeof contactSchema>;
+
+const CONTACT_INFO = [
+  { icon: Mail, label: "Email", value: "slindokuhleatlehang1998@gmail.com", href: "mailto:slindokuhleatlehang1998@gmail.com" },
+  { icon: Linkedin, label: "LinkedIn", value: "Slindokuhle Ngidi", href: "https://linkedin.com/in/slindokuhle-ngidi-691b8137", external: true },
+  { icon: Phone, label: "Phone", value: "+27 84 803 8960", href: "tel:+27848038960" },
+  { icon: Github, label: "GitHub", value: "@Slindokuhl", href: "https://github.com/Slindokuhl", external: true },
+];
 
 export function Contact() {
+  const { toast } = useToast();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({ resolver: zodResolver(contactSchema) });
+
+  async function onSubmit(values: ContactFormValues) {
+    if (!FORMSPREE_ENDPOINT) {
+      const body = encodeURIComponent(`${values.message}\n\n— ${values.name} (${values.email})`);
+      window.location.href = `mailto:slindokuhleatlehang1998@gmail.com?subject=${encodeURIComponent(values.subject)}&body=${body}`;
+      toast({ title: "Opening your email client…", description: "Message pre-filled — just hit send." });
+      reset();
+      return;
+    }
+
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      toast({ title: "Message sent!", description: "Thanks for reaching out — I'll get back to you soon." });
+      reset();
+    } catch {
+      toast({
+        title: "Something went wrong",
+        description: "Please try again, or email me directly.",
+        variant: "destructive",
+      });
+    }
+  }
+
   return (
     <section id="contact" className="py-24 md:py-32 relative overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[600px] bg-primary/5 rounded-full blur-[150px] pointer-events-none ambient-glow"></div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
 
         {/* ── Page heading ──────────────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          variants={fadeUp}
           className="mb-16 text-center max-w-2xl mx-auto"
         >
           <span className="text-primary font-medium tracking-wider uppercase text-sm mb-4 block">What's Next?</span>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="font-serif text-h1 font-bold mb-6">
             Get In Touch
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -32,10 +91,10 @@ export function Contact() {
         {/* ── Crolix Meet Video Call — shown FIRST ─────────────── */}
         <motion.div
           id="video-call"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 40, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-5xl mx-auto mb-28"
         >
           {/* Section header */}
@@ -59,7 +118,7 @@ export function Contact() {
 
           {/* iframe wrapper */}
           <div
-            className="relative rounded-2xl overflow-hidden border border-border shadow-2xl bg-[#020617]"
+            className="relative rounded-2xl overflow-hidden border border-border shadow-[var(--shadow-glow-primary),var(--shadow-2xl)] bg-[#020617]"
             style={{ height: "720px" }}
           >
             <div className="absolute top-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
@@ -82,111 +141,71 @@ export function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-5xl mx-auto">
           {/* Contact Info Cards */}
           <div className="lg:col-span-2 space-y-4">
-            <motion.a
-              href="mailto:slindokuhleatlehang1998@gmail.com"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-center gap-4 p-4 bg-card border border-card-border rounded-xl hover:border-primary/50 transition-all group"
-            >
-              <div className="h-12 w-12 rounded-full bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <Mail size={20} />
-              </div>
-              <div className="overflow-hidden">
-                <p className="text-sm text-muted-foreground">Email</p>
-                <p className="font-medium text-foreground truncate">slindokuhleatlehang1998@gmail.com</p>
-              </div>
-            </motion.a>
-
-            <motion.a
-              href="https://linkedin.com/in/slindokuhle-ngidi-691b8137"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex items-center gap-4 p-4 bg-card border border-card-border rounded-xl hover:border-primary/50 transition-all group"
-            >
-              <div className="h-12 w-12 rounded-full bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <Linkedin size={20} />
-              </div>
-              <div className="overflow-hidden">
-                <p className="text-sm text-muted-foreground">LinkedIn</p>
-                <p className="font-medium text-foreground truncate">Slindokuhle Ngidi</p>
-              </div>
-            </motion.a>
-
-            <motion.a
-              href="tel:+27848038960"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex items-center gap-4 p-4 bg-card border border-card-border rounded-xl hover:border-primary/50 transition-all group"
-            >
-              <div className="h-12 w-12 rounded-full bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <Phone size={20} />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Phone</p>
-                <p className="font-medium text-foreground">+27 84 803 8960</p>
-              </div>
-            </motion.a>
-
-            <motion.a
-              href="https://github.com/Slindokuhl"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex items-center gap-4 p-4 bg-card border border-card-border rounded-xl hover:border-primary/50 transition-all group"
-            >
-              <div className="h-12 w-12 rounded-full bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <Github size={20} />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">GitHub</p>
-                <p className="font-medium text-foreground truncate">@Slindokuhl</p>
-              </div>
-            </motion.a>
+            {CONTACT_INFO.map((info, i) => (
+              <GlowCard key={info.label} className="p-0" glowColor={i % 2 === 0 ? "primary" : "cyan"}>
+                <motion.a
+                  href={info.href}
+                  target={info.external ? "_blank" : undefined}
+                  rel={info.external ? "noopener noreferrer" : undefined}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 * (i + 1) }}
+                  className="flex items-center gap-4 p-4 group"
+                >
+                  <div className="h-12 w-12 rounded-full bg-secondary flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <info.icon size={20} />
+                  </div>
+                  <div className="overflow-hidden">
+                    <p className="text-sm text-muted-foreground">{info.label}</p>
+                    <p className="font-medium text-foreground truncate">{info.value}</p>
+                  </div>
+                </motion.a>
+              </GlowCard>
+            ))}
           </div>
 
           {/* Contact Form */}
-          <motion.div
+          <GlowCard
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-3 bg-card border border-card-border p-8 rounded-2xl shadow-2xl"
+            className="lg:col-span-3 p-8"
           >
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium text-foreground">Name</label>
-                  <Input id="name" placeholder="John Doe" className="bg-background border-border h-12" />
+                  <Input id="name" placeholder="John Doe" className="bg-background border-border h-12" {...register("name")} />
+                  {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
-                  <Input id="email" type="email" placeholder="john@example.com" className="bg-background border-border h-12" />
+                  <Input id="email" type="email" placeholder="john@example.com" className="bg-background border-border h-12" {...register("email")} />
+                  {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
                 </div>
               </div>
               <div className="space-y-2">
                 <label htmlFor="subject" className="text-sm font-medium text-foreground">Subject</label>
-                <Input id="subject" placeholder="Project Inquiry" className="bg-background border-border h-12" />
+                <Input id="subject" placeholder="Project Inquiry" className="bg-background border-border h-12" {...register("subject")} />
+                {errors.subject && <p className="text-xs text-destructive">{errors.subject.message}</p>}
               </div>
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
-                <Textarea id="message" placeholder="Hello Slindokuhle..." className="bg-background border-border min-h-[150px] resize-none" />
+                <Textarea id="message" placeholder="Hello Slindokuhle..." className="bg-background border-border min-h-[150px] resize-none" {...register("message")} />
+                {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
               </div>
-              <Button type="submit" size="lg" className="w-full h-14 bg-primary text-primary-foreground hover:bg-primary/90 text-lg">
-                Send Message
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isSubmitting}
+                className="w-full h-14 bg-primary text-primary-foreground hover:bg-primary/90 text-lg shadow-[var(--shadow-glow-primary)]"
+              >
+                {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin" /> : "Send Message"}
               </Button>
             </form>
-          </motion.div>
+          </GlowCard>
         </div>
       </div>
     </section>
