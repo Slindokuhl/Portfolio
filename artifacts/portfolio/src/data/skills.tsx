@@ -7,7 +7,7 @@ import {
 import {
   FaRobot, FaExchangeAlt, FaEnvelopeOpenText,
   FaCloud, FaPaintBrush, FaBullhorn,
-  FaSearchDollar, FaChartLine,
+  FaSearchDollar, FaChartLine, FaTachometerAlt,
 } from "react-icons/fa";
 import type { IconType } from "react-icons";
 
@@ -111,5 +111,17 @@ export const EXTENDED_CAPABILITIES: ExtendedCapability[] = [
     description:
       "Comfortable navigating major digital marketing platforms for audience building, content distribution, and campaign management.",
     tags: ["Meta Ads", "Google Analytics", "Mailchimp", "Hootsuite"],
+  },
+  {
+    icon: FaTachometerAlt,
+    title: "Performance & Cost Optimization",
+    description:
+      "Diagnoses database performance bottlenecks and rebuilds data-access patterns around them — cutting Firestore reads by 82% and improving load times 5x on DC Delivery through strategic caching and real-time data management.",
+    tags: [
+      "Cache Strategy & Optimization",
+      "Firestore Performance Tuning",
+      "Cost Optimization",
+      "Real-time Configuration Management",
+    ],
   },
 ];
