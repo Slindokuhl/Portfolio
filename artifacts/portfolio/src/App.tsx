@@ -9,7 +9,8 @@ import { IntroScreen } from "@/components/motion/IntroScreen";
 const Home = lazy(() => import("@/pages/Home"));
 const ExperiencePage = lazy(() => import("@/pages/ExperiencePage"));
 const ProjectsPage = lazy(() => import("@/pages/ProjectsPage"));
-const CaseStudyPage = lazy(() => import("@/pages/CaseStudyPage"));
+const CaseStudiesPage = lazy(() => import("@/pages/CaseStudiesPage"));
+const CaseStudyDetailPage = lazy(() => import("@/pages/CaseStudyDetailPage"));
 const ContactPage = lazy(() => import("@/pages/ContactPage"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
@@ -23,7 +24,8 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/experience" component={ExperiencePage} />
           <Route path="/projects" component={ProjectsPage} />
-          <Route path="/case-study" component={CaseStudyPage} />
+          <Route path="/case-studies/:slug" component={CaseStudyDetailPage} />
+          <Route path="/case-studies" component={CaseStudiesPage} />
           <Route path="/contact" component={ContactPage} />
           <Route component={NotFound} />
         </Switch>
