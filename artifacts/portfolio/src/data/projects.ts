@@ -27,6 +27,15 @@ export const PROJECTS: Project[] = [
     image: "/images/attendify.png",
   },
   {
+    title: "DC Delivery",
+    description:
+      "Food delivery platform connecting customers with local restaurants for fast, reliable delivery. Location-based ordering built on Laravel and Firebase, optimized for performance and cost at scale.",
+    tags: ["Laravel", "Firebase", "Food Delivery", "Geolocation"],
+    liveUrl: "https://dcdelivery.co.za",
+    githubUrl: "https://github.com/slindokuhle",
+    image: "/images/dc-delivery.png",
+  },
+  {
     title: "Crolix Meet",
     description:
       "Online meeting app for real-time team collaboration. Features high-quality video and audio streaming built on top of Agora SDK.",
