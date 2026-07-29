@@ -31,7 +31,7 @@ export const PROJECTS: Project[] = [
     description:
       "Online meeting app for real-time team collaboration. Features high-quality video and audio streaming built on top of Agora SDK.",
     tags: ["WebRTC", "Agora SDK", "Online Meeting", "Collaboration"],
-    liveUrl: "/contact",
+    liveUrl: "https://crolix-vmeetchat.vercel.app/",
     githubUrl: "https://github.com/slindokuhle",
     image: "/images/crolix-meet.png",
   },
