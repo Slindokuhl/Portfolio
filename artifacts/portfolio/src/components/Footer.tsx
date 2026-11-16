@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Youtube } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
@@ -57,6 +57,15 @@ export function Footer() {
           >
             <Linkedin size={20} />
             <span className="sr-only">LinkedIn</span>
+          </a>
+          <a
+            href="https://www.youtube.com/@SlicAtle"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)] transition-all"
+          >
+            <Youtube size={20} />
+            <span className="sr-only">YouTube</span>
           </a>
           <a
             href="mailto:slindokuhleatlehang1998@gmail.com"

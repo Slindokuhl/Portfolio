@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Download, Github, Linkedin } from "lucide-react";
+import { ArrowRight, Download, Github, Linkedin, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useRef } from "react";
@@ -130,6 +130,15 @@ export function Hero() {
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 <Linkedin size={22} />
+              </a>
+              <a
+                href="https://www.youtube.com/@SlicAtle"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube channel"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Youtube size={22} />
               </a>
               <div className="h-px w-8 bg-border" />
               <span className="text-sm text-muted-foreground">

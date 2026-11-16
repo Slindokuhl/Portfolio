@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Mail, Linkedin, Phone, Github, Video, Loader2 } from "lucide-react";
+import { Mail, Linkedin, Phone, Github, Video, Loader2, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,6 +26,7 @@ const CONTACT_INFO = [
   { icon: Linkedin, label: "LinkedIn", value: "Slindokuhle Ngidi", href: "https://linkedin.com/in/slindokuhle-ngidi-691b8137", external: true },
   { icon: Phone, label: "Phone", value: "+27 84 803 8960", href: "tel:+27848038960" },
   { icon: Github, label: "GitHub", value: "@Slindokuhl", href: "https://github.com/Slindokuhl", external: true },
+  { icon: Youtube, label: "YouTube", value: "CodeSlic (@SlicAtle)", href: "https://www.youtube.com/@SlicAtle", external: true },
 ];
 
 export function Contact() {
