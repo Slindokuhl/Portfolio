@@ -12,6 +12,7 @@ const ProjectsPage = lazy(() => import("@/pages/ProjectsPage"));
 const CaseStudiesPage = lazy(() => import("@/pages/CaseStudiesPage"));
 const CaseStudyDetailPage = lazy(() => import("@/pages/CaseStudyDetailPage"));
 const ContactPage = lazy(() => import("@/pages/ContactPage"));
+const ServicesPage = lazy(() => import("@/pages/ServicesPage"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ function Router() {
           <Route path="/projects" component={ProjectsPage} />
           <Route path="/case-studies/:slug" component={CaseStudyDetailPage} />
           <Route path="/case-studies" component={CaseStudiesPage} />
+          <Route path="/services" component={ServicesPage} />
           <Route path="/contact" component={ContactPage} />
           <Route component={NotFound} />
         </Switch>
