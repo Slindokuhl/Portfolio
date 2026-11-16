@@ -23,7 +23,7 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 const CONTACT_INFO = [
   { icon: Mail, label: "Email", value: "slindokuhleatlehang1998@gmail.com", href: "mailto:slindokuhleatlehang1998@gmail.com" },
-  { icon: Linkedin, label: "LinkedIn", value: "Slindokuhle Ngidi", href: "https://linkedin.com/in/slindokuhle-ngidi-691b8137", external: true },
+  { icon: Linkedin, label: "LinkedIn", value: "Slindokuhle Ngidi", href: "https://linkedin.com/in/slindokuhle-ngidi-69181b217", external: true },
   { icon: Phone, label: "Phone", value: "+27 84 803 8960", href: "tel:+27848038960" },
   { icon: Github, label: "GitHub", value: "@Slindokuhl", href: "https://github.com/Slindokuhl", external: true },
   { icon: Youtube, label: "YouTube", value: "CodeSlic (@SlicAtle)", href: "https://www.youtube.com/@SlicAtle", external: true },

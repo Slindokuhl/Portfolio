@@ -50,7 +50,7 @@ export function Footer() {
             <span className="sr-only">GitHub</span>
           </a>
           <a
-            href="https://linkedin.com/in/slindokuhle-ngidi-691b8137"
+            href="https://linkedin.com/in/slindokuhle-ngidi-69181b217"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-primary hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)] transition-all"

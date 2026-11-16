@@ -124,7 +124,7 @@ export function Hero() {
                 <Github size={22} />
               </a>
               <a
-                href="https://linkedin.com/in/slindokuhle-ngidi-691b8137"
+                href="https://linkedin.com/in/slindokuhle-ngidi-69181b217"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
