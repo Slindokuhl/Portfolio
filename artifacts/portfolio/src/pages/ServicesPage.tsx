@@ -40,7 +40,8 @@ export default function ServicesPage() {
           <h1 className="font-serif text-h1 font-bold mb-6">Services</h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Fixed-price help with the things that slow teams down: shipping iOS apps, deploying
-            safely, cutting cloud bills, and getting a business online. Every service comes from
+            safely, cutting cloud bills, getting a business online, and building full online stores
+            and delivery platforms. Every service comes from
             work I've already done on real projects.
           </p>
           <div className="flex flex-wrap gap-4 mt-8">
@@ -88,6 +89,18 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
+                {s.stack && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {s.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs font-medium px-2.5 py-1 rounded-full border border-border text-muted-foreground"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <div className="mt-auto pt-5 border-t border-border">
                   <div className="flex flex-wrap items-end justify-between gap-4 mb-5">
                     <div>

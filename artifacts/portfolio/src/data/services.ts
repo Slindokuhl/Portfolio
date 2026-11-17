@@ -8,6 +8,7 @@ export interface Service {
   priceZar: string;
   priceUsd: string;
   proof: { label: string; href: string };
+  stack?: string[];
   featured?: boolean;
 }
 
@@ -81,6 +82,42 @@ export const SERVICES: Service[] = [
     priceZar: "R6,000",
     priceUsd: "$350",
     proof: { label: "See my projects", href: "/projects" },
+  },
+  {
+    id: "ecommerce-store",
+    title: "Full E-commerce Store",
+    tagline: "A complete fashion or retail store like the big brands, with your own admin to run it.",
+    forWho: "Clothing brands, retailers and businesses ready to sell online",
+    includes: [
+      "Storefront with products, sizes, colours, search, filters and wishlist",
+      "Cart, checkout and online payments (PayFast, Yoco, Ozow or Stripe)",
+      "Customer accounts, order history and email order updates",
+      "Admin dashboard: products, stock, orders, discounts and sales reports",
+      "Hosted on HostAfrica with domain, SSL, backups and SEO",
+    ],
+    stack: ["Medusa", "PostgreSQL", "MySQL", "Firebase", "React", "Laravel", "HostAfrica"],
+    timeline: "3–6 weeks",
+    priceZar: "R18,000",
+    priceUsd: "$1,000",
+    proof: { label: "See my projects", href: "/projects" },
+  },
+  {
+    id: "delivery-platform",
+    title: "Delivery Platform: Store, Driver App & Admin",
+    tagline: "Your own ordering and delivery system, from the customer's order to the driver's door.",
+    forWho: "Shops, restaurants, pharmacies and delivery businesses",
+    includes: [
+      "Customer app and website to browse, order, pay and track live",
+      "Driver app with order alerts, navigation and proof of delivery",
+      "Admin dashboard for orders, drivers, stores, payouts and reports",
+      "Live order tracking and push notifications",
+      "Android and iOS apps published to the stores, server hosted on HostAfrica",
+    ],
+    stack: ["Flutter", "Firebase", "PostgreSQL", "MySQL", "Medusa", "Laravel", "HostAfrica"],
+    timeline: "6–10 weeks",
+    priceZar: "R45,000",
+    priceUsd: "$2,500",
+    proof: { label: "Case study: a delivery app I built", href: "/case-studies/dc-delivery-firebase-optimization" },
   },
 ];
 
